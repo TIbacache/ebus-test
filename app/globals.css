@@ -1,26 +1,165 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   E-Bus Control — Design tokens (Tailwind v4, CSS-first @theme)
+   Paleta obligatoria del prompt. Estética "mission control" oscura.
+   ============================================================ */
+@theme {
+  /* Fondos */
+  --color-bg: #0a0e1a;
+  --color-surface: #111827;
+  --color-surface-2: #1a2235;
+  --color-surface-offset: #1f2d40;
+  --color-line: rgba(255, 255, 255, 0.08);
+
+  /* Texto */
+  --color-text: #e2e8f0;
+  --color-text-muted: #94a3b8;
+  --color-text-faint: #475569;
+
+  /* Semáforo de batería */
+  --color-healthy: #22c55e;
+  --color-normal: #84cc16; /* verde-amarillo (62%) */
+  --color-warning: #ff8c00;
+  --color-critical: #ff4444;
+
+  /* Acentos / interactivos */
+  --color-primary: #00d4aa;
+  --color-primary-hover: #00b894;
+  --color-success: #22c55e;
+
+  /* Tipografía */
+  --font-sans: var(--font-general-sans), ui-sans-serif, system-ui, -apple-system,
+    sans-serif;
+
+  /* Radios */
+  --radius-card: 12px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ============================================================
+   Base
+   ============================================================ */
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-feature-settings: "ss01", "cv01";
+  }
+  /* Números siempre tabulares en datos */
+  th,
+  td,
+  [data-tnum] {
+    font-variant-numeric: tabular-nums;
+  }
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-primary) 30%, transparent);
+    color: #fff;
+  }
+  /* Scrollbar oscuro */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-surface-offset) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: var(--color-surface-offset);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================================
+   Utilidades de proyecto
+   ============================================================ */
+@layer utilities {
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+  /* Glassmorphism: SOLO overlays y modales */
+  .glass {
+    background: rgba(17, 24, 39, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  /* Card estándar del sistema */
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  }
+  /* Grilla de calles del mapa simulado */
+  .street-grid {
+    background-image: linear-gradient(
+        to right,
+        rgba(148, 163, 184, 0.08) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+}
+
+/* ============================================================
+   Animaciones
+   ============================================================ */
+/* Pulso crítico (badges / dots de alerta) */
+@keyframes pulseCritical {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(255, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 68, 68, 0);
+  }
+}
+.pulse-critical {
+  animation: pulseCritical 2s infinite;
+}
+.pulse-dot {
+  animation: pulseCritical 1.8s infinite;
+}
+
+/* Entrada de alertas desde la derecha */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.animate-slide-in {
+  animation: slideInRight 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Línea ECG del logo (metáfora "El Corazón del Bus") */
+@keyframes ecgFlow {
+  to {
+    stroke-dashoffset: -260;
+  }
+}
+.ecg-line {
+  stroke-dasharray: 130 130;
+  animation: ecgFlow 2.4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-critical,
+  .pulse-dot,
+  .animate-slide-in,
+  .ecg-line {
+    animation: none;
+  }
 }
