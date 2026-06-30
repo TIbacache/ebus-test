@@ -310,3 +310,37 @@ export const incidenciasPorUnidad = [
 ];
 
 export const fallasEvitadas = 3;
+
+// ---- Derivados para gráficos multi-serie ----------------------------------
+
+/** Color de línea por unidad (reportes). */
+export const unidadLineColor: Record<string, string> = {
+  "MIC-101": "#22C55E",
+  "MIC-102": "#84CC16",
+  "MIC-103": "#FF8C00",
+  "MIC-104": "#FF4444",
+  "MIC-105": "#00D4AA",
+};
+
+/** Degradación de toda la flota en un único dataset (multi-línea). */
+export const degradacionFlota = degradacion30d["MIC-101"].map((_, i) => {
+  const row: Record<string, number> = { dia: i + 1 };
+  for (const id of Object.keys(degradacion30d)) {
+    row[id] = degradacion30d[id][i].soh;
+  }
+  return row;
+});
+
+// ---- Conductor ------------------------------------------------------------
+
+export const modoConduccion = "Normal";
+
+// ---- Configuración: usuarios del sistema ----------------------------------
+
+export const usuariosSistema = [
+  { nombre: "Tomás Ibacache", rol: "Administrador", estado: "Activo" },
+  { nombre: "Operador 01", rol: "Operador", estado: "Activo" },
+  { nombre: "Juan Silva", rol: "Mecánico", estado: "Activo" },
+  { nombre: "Pedro Flores", rol: "Conductor", estado: "Activo" },
+  { nombre: "Carla Núñez", rol: "Operador", estado: "Inactivo" },
+] as const;
