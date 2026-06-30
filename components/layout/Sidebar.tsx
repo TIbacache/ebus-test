@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
 import { ChevronsLeft, LogOut } from "lucide-react";
-import { navItems } from "@/lib/constants";
+import { navItems, ods } from "@/lib/constants";
 import { navIcon } from "@/components/ui/icons";
 import { EcgLogo } from "@/components/ui/EcgLogo";
 
@@ -26,7 +26,7 @@ export function Sidebar({
     <motion.aside
       animate={{ width: collapsed ? 64 : 240 }}
       transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-      className="sticky top-0 z-30 hidden h-dvh shrink-0 flex-col border-r border-line bg-surface md:flex"
+      className="sticky top-0 z-30 hidden h-dvh shrink-0 flex-col border-r border-white/5 bg-sidebar text-sidebar-fg md:flex"
     >
       <div className="flex h-16 items-center gap-2.5 overflow-hidden px-4">
         <EcgLogo size={32} />
@@ -49,7 +49,7 @@ export function Sidebar({
               className={`group relative flex items-center gap-3 rounded-lg px-2.5 py-2.5 text-sm font-medium transition-colors ${
                 active
                   ? "bg-primary/10 text-primary"
-                  : "text-text-muted hover:bg-surface-2 hover:text-text"
+                  : "text-sidebar-muted hover:bg-sidebar-2 hover:text-sidebar-fg"
               }`}
             >
               {active && (
@@ -70,10 +70,31 @@ export function Sidebar({
         })}
       </nav>
 
-      <div className="border-t border-line p-2.5">
+      {/* ODS — refuerza la metáfora de sostenibilidad, siempre visible */}
+      {!collapsed && (
+        <div className="border-t border-white/5 px-4 py-3">
+          <p className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-sidebar-muted">
+            Impacto ODS
+          </p>
+          <div className="flex items-center gap-1.5">
+            {ods.map((o) => (
+              <span
+                key={o.num}
+                title={`ODS ${o.num} — ${o.nombre}`}
+                className="grid size-6 place-items-center rounded text-[11px] font-bold text-white"
+                style={{ backgroundColor: o.color }}
+              >
+                {o.num}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="border-t border-white/5 p-2.5">
         <button
           onClick={onToggle}
-          className="flex w-full items-center gap-3 rounded-lg px-2.5 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-surface-2 hover:text-text"
+          className="flex w-full items-center gap-3 rounded-lg px-2.5 py-2.5 text-sm font-medium text-sidebar-muted transition-colors hover:bg-sidebar-2 hover:text-sidebar-fg"
         >
           <ChevronsLeft
             className={`size-5 shrink-0 transition-transform duration-200 ${
@@ -85,7 +106,7 @@ export function Sidebar({
         <Link
           href="/login"
           title={collapsed ? "Cerrar sesión" : undefined}
-          className="flex w-full items-center gap-3 rounded-lg px-2.5 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-surface-2 hover:text-text"
+          className="flex w-full items-center gap-3 rounded-lg px-2.5 py-2.5 text-sm font-medium text-sidebar-muted transition-colors hover:bg-sidebar-2 hover:text-sidebar-fg"
         >
           <LogOut className="size-5 shrink-0" />
           {!collapsed && <span>Cerrar sesión</span>}

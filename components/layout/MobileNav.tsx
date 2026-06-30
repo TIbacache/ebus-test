@@ -17,7 +17,7 @@ export function MobileNav() {
     .filter((n): n is (typeof navItems)[number] => Boolean(n));
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 flex h-16 items-stretch border-t border-line bg-surface/95 backdrop-blur-md md:hidden">
+    <nav className="fixed inset-x-0 bottom-0 z-40 flex h-16 items-stretch border-t border-white/5 bg-sidebar/95 text-sidebar-fg backdrop-blur-md md:hidden">
       {items.map((item) => {
         const Icon = navIcon[item.icon];
         const active = isActive(pathname, item.href);
@@ -26,7 +26,7 @@ export function MobileNav() {
             key={item.href}
             href={item.href}
             className={`relative flex flex-1 flex-col items-center justify-center gap-1 text-[11px] font-medium transition-colors ${
-              active ? "text-primary" : "text-text-muted"
+              active ? "text-primary" : "text-sidebar-muted"
             }`}
           >
             <span className="relative">

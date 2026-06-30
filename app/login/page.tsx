@@ -21,14 +21,14 @@ export default function LoginPage() {
   return (
     <div className="grid min-h-dvh lg:grid-cols-2">
       {/* Panel marca */}
-      <aside className="relative hidden flex-col justify-between overflow-hidden border-r border-line bg-surface p-10 lg:flex">
+      <aside className="relative hidden flex-col justify-between overflow-hidden border-r border-white/5 bg-sidebar p-10 text-sidebar-fg lg:flex">
         <div className="street-grid pointer-events-none absolute inset-0 opacity-40" />
         <div className="relative">
           <EcgLogo size={48} />
           <h1 className="mt-6 text-4xl font-bold tracking-tight">
             E-Bus <span className="text-primary">Control</span>
           </h1>
-          <p className="mt-2 text-lg text-text-muted">{tagline}</p>
+          <p className="mt-2 text-lg text-sidebar-muted">{tagline}</p>
         </div>
 
         <div className="relative">
@@ -42,12 +42,12 @@ export default function LoginPage() {
               className="ecg-line"
             />
           </svg>
-          <p className="mt-6 max-w-md text-sm leading-relaxed text-text-muted">
+          <p className="mt-6 max-w-md text-sm leading-relaxed text-sidebar-muted">
             Como un monitor cardíaco, E-Bus Control vigila el{" "}
-            <span className="font-semibold text-text">pulso</span> de cada
+            <span className="font-semibold text-sidebar-fg">pulso</span> de cada
             batería, predice fallas y alerta al instante al Centro de Control.
           </p>
-          <p className="mt-4 text-xs font-medium uppercase tracking-wider text-text-faint">
+          <p className="mt-4 text-xs font-medium uppercase tracking-wider text-sidebar-muted/70">
             {institucion}
           </p>
         </div>

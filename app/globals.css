@@ -1,32 +1,73 @@
 @import "tailwindcss";
 
 /* ============================================================
-   E-Bus Control — Design tokens (Tailwind v4, CSS-first @theme)
-   Paleta obligatoria del prompt. Estética "mission control" oscura.
+   E-Bus Control — Theming claro/oscuro (Tailwind v4).
+   Los tokens de superficie/texto se voltean con la clase .dark
+   en <html>. Los colores de estado y el acento teal son constantes.
+   Tema CLARO inspirado en Infografía1 (cards claras + sidebar oscuro).
    ============================================================ */
-@theme {
-  /* Fondos */
-  --color-bg: #0a0e1a;
-  --color-surface: #111827;
-  --color-surface-2: #1a2235;
-  --color-surface-offset: #1f2d40;
-  --color-line: rgba(255, 255, 255, 0.08);
 
-  /* Texto */
-  --color-text: #e2e8f0;
-  --color-text-muted: #94a3b8;
-  --color-text-faint: #475569;
+/* Valores por tema (el claro es el default) */
+:root {
+  --bg: #eef2f7;
+  --surface: #ffffff;
+  --surface-2: #f1f5f9;
+  --surface-offset: #e2e8f0;
+  --line: rgba(15, 23, 42, 0.1);
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --text-faint: #94a3b8;
 
-  /* Semáforo de batería */
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.08),
+    0 1px 2px rgba(15, 23, 42, 0.04);
+  --street-line: rgba(15, 23, 42, 0.06);
+  --avenida: rgba(15, 23, 42, 0.05);
+  --glass-bg: rgba(255, 255, 255, 0.82);
+}
+
+.dark {
+  --bg: #0a0e1a;
+  --surface: #111827;
+  --surface-2: #1a2235;
+  --surface-offset: #1f2d40;
+  --line: rgba(255, 255, 255, 0.08);
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-faint: #475569;
+
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
+  --street-line: rgba(148, 163, 184, 0.08);
+  --avenida: rgba(255, 255, 255, 0.03);
+  --glass-bg: rgba(17, 24, 39, 0.82);
+}
+
+@theme inline {
+  /* Superficies / texto (themables) */
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-offset: var(--surface-offset);
+  --color-line: var(--line);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-faint: var(--text-faint);
+
+  /* Semáforo de batería (constantes) */
   --color-healthy: #22c55e;
-  --color-normal: #84cc16; /* verde-amarillo (62%) */
+  --color-normal: #84cc16;
   --color-warning: #ff8c00;
   --color-critical: #ff4444;
 
-  /* Acentos / interactivos */
+  /* Acento / interactivos (constantes) */
   --color-primary: #00d4aa;
   --color-primary-hover: #00b894;
   --color-success: #22c55e;
+
+  /* Sidebar — siempre oscuro (firma de marca, estilo Infografía1) */
+  --color-sidebar: #0f1829;
+  --color-sidebar-2: #1b2740;
+  --color-sidebar-fg: #e2e8f0;
+  --color-sidebar-muted: #93a4bd;
 
   /* Tipografía */
   --font-sans: var(--font-general-sans), ui-sans-serif, system-ui, -apple-system,
@@ -40,15 +81,11 @@
    Base
    ============================================================ */
 @layer base {
-  html {
-    color-scheme: dark;
-  }
   body {
     background-color: var(--color-bg);
     color: var(--color-text);
     font-feature-settings: "ss01", "cv01";
   }
-  /* Números siempre tabulares en datos */
   th,
   td,
   [data-tnum] {
@@ -56,9 +93,7 @@
   }
   ::selection {
     background-color: color-mix(in srgb, var(--color-primary) 30%, transparent);
-    color: #fff;
   }
-  /* Scrollbar oscuro */
   * {
     scrollbar-width: thin;
     scrollbar-color: var(--color-surface-offset) transparent;
@@ -82,35 +117,34 @@
   .tnum {
     font-variant-numeric: tabular-nums;
   }
-  /* Glassmorphism: SOLO overlays y modales */
   .glass {
-    background: rgba(17, 24, 39, 0.8);
+    background: var(--glass-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
-  /* Card estándar del sistema */
   .card {
     background: var(--color-surface);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-card);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-card);
   }
-  /* Grilla de calles del mapa simulado */
   .street-grid {
     background-image: linear-gradient(
         to right,
-        rgba(148, 163, 184, 0.08) 1px,
+        var(--street-line) 1px,
         transparent 1px
       ),
-      linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+      linear-gradient(to bottom, var(--street-line) 1px, transparent 1px);
     background-size: 40px 40px;
+  }
+  .avenida {
+    background-color: var(--avenida);
   }
 }
 
 /* ============================================================
    Animaciones
    ============================================================ */
-/* Pulso crítico (badges / dots de alerta) */
 @keyframes pulseCritical {
   0% {
     box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.55);
@@ -129,7 +163,6 @@
   animation: pulseCritical 1.8s infinite;
 }
 
-/* Entrada de alertas desde la derecha */
 @keyframes slideInRight {
   from {
     opacity: 0;
@@ -144,7 +177,6 @@
   animation: slideInRight 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* Línea ECG del logo (metáfora "El Corazón del Bus") */
 @keyframes ecgFlow {
   to {
     stroke-dashoffset: -260;

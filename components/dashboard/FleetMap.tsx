@@ -84,8 +84,8 @@ export function FleetMap() {
 
       <div className="street-grid relative h-72 w-full sm:h-80">
         {/* Avenidas principales */}
-        <div className="absolute inset-x-0 top-1/2 h-3 -translate-y-1/2 bg-white/[0.03]" />
-        <div className="absolute inset-y-0 left-[45%] w-3 bg-white/[0.03]" />
+        <div className="absolute inset-x-0 top-1/2 h-3 -translate-y-1/2 avenida" />
+        <div className="absolute inset-y-0 left-[45%] w-3 avenida" />
 
         {decorativos.map((d, i) => (
           <Marker key={i} estado={d.estado} top={d.top} left={d.left} />

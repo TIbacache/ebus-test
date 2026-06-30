@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Bell, Moon, UserRound } from "lucide-react";
+import { Menu, Bell, UserRound } from "lucide-react";
 import { navItems } from "@/lib/constants";
 import { EcgLogo } from "@/components/ui/EcgLogo";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 function titleFor(pathname: string): string {
   if (pathname.startsWith("/flota/")) return "Detalle de Unidad";
@@ -37,13 +38,7 @@ export function Header({ onToggleSidebar }: { onToggleSidebar: () => void }) {
       </h1>
 
       <div className="ml-auto flex items-center gap-2">
-        <button
-          aria-label="Tema oscuro activo"
-          title="Tema: Oscuro"
-          className="hidden size-9 place-items-center rounded-lg text-text-muted transition-colors hover:bg-surface-2 hover:text-text sm:grid"
-        >
-          <Moon className="size-[18px]" />
-        </button>
+        <ThemeToggle />
 
         <Link
           href="/alertas"

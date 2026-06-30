@@ -28,10 +28,10 @@ export function DegradationChart({
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: -18 }}>
-        <CartesianGrid stroke="rgba(255,255,255,0.06)" vertical={false} />
+        <CartesianGrid stroke="rgba(148,163,184,0.2)" vertical={false} />
         <XAxis
           dataKey="dia"
-          tick={{ fill: "#475569", fontSize: 11 }}
+          tick={{ fill: "#64748b", fontSize: 11 }}
           tickLine={false}
           axisLine={false}
           interval={5}
@@ -40,7 +40,7 @@ export function DegradationChart({
         <YAxis
           domain={[0, 100]}
           width={40}
-          tick={{ fill: "#475569", fontSize: 11 }}
+          tick={{ fill: "#64748b", fontSize: 11 }}
           tickLine={false}
           axisLine={false}
           tickFormatter={(v) => `${v}%`}

@@ -162,8 +162,8 @@ export default async function DetalleUnidadPage({
             <h3 className="text-sm font-semibold">Ubicación actual</h3>
           </div>
           <div className="street-grid relative h-44 w-full">
-            <div className="absolute inset-x-0 top-1/2 h-2.5 -translate-y-1/2 bg-white/[0.03]" />
-            <div className="absolute inset-y-0 left-1/2 w-2.5 bg-white/[0.03]" />
+            <div className="absolute inset-x-0 top-1/2 h-2.5 -translate-y-1/2 avenida" />
+            <div className="absolute inset-y-0 left-1/2 w-2.5 avenida" />
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
               <span
                 className={`grid size-7 place-items-center rounded-full ${c.soft} ${c.text} ${

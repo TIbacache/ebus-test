@@ -21,12 +21,22 @@ export const metadata: Metadata = {
   authors: [{ name: "Equipo E-Bus Control — INACAP La Serena" }],
 };
 
+// Aplica el tema guardado antes del primer paint (evita parpadeo). Default: claro.
+const themeScript = `(function(){try{if(localStorage.getItem('theme')==='dark'){document.documentElement.classList.add('dark');}}catch(e){}})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" className={`${generalSans.variable} h-full antialiased`}>
-      <body className="min-h-full bg-bg font-sans text-text">{children}</body>
+    <html
+      lang="es"
+      suppressHydrationWarning
+      className={`${generalSans.variable} h-full antialiased`}
+    >
+      <body className="min-h-full bg-bg font-sans text-text">
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {children}
+      </body>
     </html>
   );
 }
