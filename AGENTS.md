@@ -18,8 +18,10 @@ TODO el texto de UI y contenido en **español chileno** (ej. "micros", no "buses
 - Caso activo MIC-104: ubicación "Av. Central con San Martín", falla "Tensión de Celda Baja (Crítico)", mecánico ETA 15 min. Debe verse con **badge rojo pulsante** en Dashboard/Flota/Detalle/Alertas.
 - Ignorar "Unidad 405" de infografías viejas: la unidad crítica es **MIC-104**.
 
-## Paleta obligatoria (tokens `@theme` en `app/globals.css` — Tailwind v4, sin tailwind.config)
-bg `#0A0E1A` · surface `#111827` · surface-2 `#1a2235` · surface-offset `#1f2d40` · text `#E2E8F0` · text-muted `#94A3B8` · text-faint `#475569` · healthy `#22C55E` · warning `#FF8C00` · critical `#FF4444` · primary/teal `#00D4AA` · primary-hover `#00B894`. Estética oscura; **NO** fondos blancos, **NO** gradientes púrpura/violeta, **NO** cards con borde-izquierdo de color.
+## Paleta y tema (tokens `@theme inline` en `app/globals.css` — Tailwind v4, sin tailwind.config)
+El semáforo de batería y el acento teal son **constantes**: healthy `#22C55E` · normal `#84CC16` · warning `#FF8C00` · critical `#FF4444` · primary/teal `#00D4AA` · primary-hover `#00B894`. Los tokens de superficie/texto son **themables** y se voltean con la clase `.dark` en `<html>`. Valores del tema **oscuro** (en `.dark`): bg `#0A0E1A` · surface `#111827` · surface-2 `#1a2235` · surface-offset `#1f2d40` · text `#E2E8F0` · text-muted `#94A3B8` · text-faint `#475569`. El **tema claro es el default** (definido en `:root`, estilo Infografía1: cards claras + sidebar siempre oscuro navy `#0f1829`).
+
+**Tema claro por defecto + toggle a oscuro** (`components/theme/ThemeToggle.tsx`; script no-flash en `app/layout.tsx`). Acento **teal** `#00D4AA`; sidebar siempre oscuro como firma de marca. **NO** gradientes púrpura/violeta, **NO** cards con borde-izquierdo de color. Glassmorphism sutil solo en overlays (usar util `.glass`, con `--glass-bg` themable).
 
 ## Stack y convenciones
 - Next.js 16 (App Router) + React 19.2 + TypeScript + Turbopack. Tailwind v4. Fuente General Sans (Fontshare) vía `next/font/local`.
