@@ -100,25 +100,31 @@ export const mobileNavIcons: NavIcon[] = [
 /** Roles de acceso (login). */
 export const roles = ["Operador", "Mecánico", "Conductor", "Administrador"] as const;
 
-/** ODS vinculados (colores oficiales ONU). */
+/** ODS vinculados (colores oficiales ONU) + funcionalidad de la app que los concreta. */
 export const ods = [
   {
     num: 3,
     nombre: "Salud y Bienestar",
     detalle: "Previene accidentes por fallas eléctricas; protege a pasajeros y conductores.",
     color: "#4C9F38",
+    accion: "Ver alertas en tiempo real",
+    href: "/alertas",
   },
   {
     num: 7,
     nombre: "Energía Asequible y No Contaminante",
     detalle: "Optimiza momentos y método de recarga; reduce consumo innecesario.",
     color: "#FCC30B",
+    accion: "Ajustar carga inteligente",
+    href: "/configuracion",
   },
   {
     num: 13,
     nombre: "Acción por el Clima",
     detalle: "Extiende la vida útil de baterías; reduce residuos electrónicos.",
     color: "#3F7E44",
+    accion: "Ver salud y degradación",
+    href: "/reportes",
   },
 ];
 

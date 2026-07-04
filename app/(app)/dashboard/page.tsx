@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Bus, Route, TriangleAlert, Wrench, ChevronRight } from "lucide-react";
 import { KPICard } from "@/components/ui/KPICard";
+import { FleetPulse } from "@/components/dashboard/FleetPulse";
+import { OdsImpact } from "@/components/dashboard/OdsImpact";
 import { FleetMap } from "@/components/dashboard/FleetMap";
 import { AlertFeed } from "@/components/dashboard/AlertFeed";
 import { BatteryBar } from "@/components/ui/BatteryBar";
@@ -17,6 +19,9 @@ export default function DashboardPage() {
           Monitoreo en tiempo real — La Serena · {new Date().toLocaleDateString("es-CL", { weekday: "long", day: "numeric", month: "long" })}
         </p>
       </div>
+
+      {/* Metáfora "El Corazón del Bus" — pulso de la flota */}
+      <FleetPulse />
 
       {/* KPIs */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
@@ -111,6 +116,9 @@ export default function DashboardPage() {
 
         <AlertFeed />
       </div>
+
+      {/* Impacto ODS 3/7/13 conectado a funcionalidades */}
+      <OdsImpact />
     </div>
   );
 }
