@@ -6,6 +6,7 @@ import { Menu, Bell, UserRound } from "lucide-react";
 import { navItems } from "@/lib/constants";
 import { EcgLogo } from "@/components/ui/EcgLogo";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import { SupportButton } from "@/components/support/SupportButton";
 
 function titleFor(pathname: string): string {
   if (pathname.startsWith("/flota/")) return "Detalle de Unidad";
@@ -38,6 +39,8 @@ export function Header({ onToggleSidebar }: { onToggleSidebar: () => void }) {
       </h1>
 
       <div className="ml-auto flex items-center gap-2">
+        <SupportButton />
+
         <ThemeToggle />
 
         <Link
