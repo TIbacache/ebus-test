@@ -39,7 +39,13 @@ function folio(prefix: string) {
   return `${prefix}-${Math.floor(1000 + Math.random() * 9000)}`;
 }
 
-export function SupportPanel({ onClose }: { onClose: () => void }) {
+export function SupportPanel({
+  onClose,
+  autoFocusSearch = true,
+}: {
+  onClose: () => void;
+  autoFocusSearch?: boolean;
+}) {
   const [active, setActive] = useState<Active>("menu");
 
   const current = menuSections.find((s) => s.id === active);
@@ -94,7 +100,11 @@ export function SupportPanel({ onClose }: { onClose: () => void }) {
             {active === "sugerencia" && <SugerenciaForm />}
             {active === "guia" && <Guia onClose={onClose} />}
             {active === "buscador" && (
-              <Buscador onClose={onClose} onSection={setActive} />
+              <Buscador
+                onClose={onClose}
+                onSection={setActive}
+                autoFocus={autoFocusSearch}
+              />
             )}
             {active === "faq" && <Faq />}
             {active === "contacto" && <Contacto />}
@@ -409,9 +419,11 @@ function Guia({ onClose }: { onClose: () => void }) {
 function Buscador({
   onClose,
   onSection,
+  autoFocus = true,
 }: {
   onClose: () => void;
   onSection: (id: SupportSectionId) => void;
+  autoFocus?: boolean;
 }) {
   const [query, setQuery] = useState("");
   const results = searchHelp(query);
@@ -421,7 +433,7 @@ function Buscador({
       <div className="relative">
         <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-text-faint" />
         <input
-          autoFocus
+          autoFocus={autoFocus}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Busca pantallas, unidades, acciones…"

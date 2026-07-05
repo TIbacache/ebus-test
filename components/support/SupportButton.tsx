@@ -1,12 +1,29 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "motion/react";
 import { LifeBuoy } from "lucide-react";
 import { SupportPanel } from "./SupportPanel";
 
 const FOCUSABLE =
   'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+
+const noop = () => () => {};
+/** true solo tras montar en el cliente (el portal necesita document, ausente en SSR). */
+function useMounted() {
+  return useSyncExternalStore(
+    noop,
+    () => true,
+    () => false,
+  );
+}
 
 /** Detecta viewport móvil (< md). Lazy-init evita flash en el primer render. */
 function useIsMobile() {
@@ -27,6 +44,7 @@ function useIsMobile() {
 
 export function SupportButton() {
   const [open, setOpen] = useState(false);
+  const mounted = useMounted();
   const isMobile = useIsMobile();
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -91,55 +109,63 @@ export function SupportButton() {
         <LifeBuoy className="size-[18px]" />
       </button>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            className="fixed inset-0 z-50"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-          >
-            {/* Backdrop: atenuado en móvil, invisible (solo captura clic) en desktop */}
-            <div
-              onClick={close}
-              className={`absolute inset-0 ${
-                isMobile ? "bg-black/40 backdrop-blur-[2px]" : ""
-              }`}
-            />
+      {/* El overlay se renderiza en <body> (portal): así el `fixed inset-0 z-50`
+          referencia al viewport y no queda atrapado por el `backdrop-blur` del
+          Header (que crea containing block + stacking context y, en móvil,
+          descolocaba el sheet y lo hundía bajo la bottom nav). */}
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {open && (
+              <motion.div
+                className="fixed inset-0 z-50"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+              >
+                {/* Backdrop: atenuado en móvil, invisible (solo captura clic) en desktop */}
+                <div
+                  onClick={close}
+                  className={`absolute inset-0 ${
+                    isMobile ? "bg-black/40 backdrop-blur-[2px]" : ""
+                  }`}
+                />
 
-            {/* Panel */}
-            <motion.div
-              ref={panelRef}
-              role="dialog"
-              aria-modal="true"
-              aria-label="Centro de soporte de E-Bus Control"
-              tabIndex={-1}
-              onClick={(e) => e.stopPropagation()}
-              initial={
-                isMobile
-                  ? { y: "100%" }
-                  : { opacity: 0, scale: 0.96, y: -8 }
-              }
-              animate={isMobile ? { y: 0 } : { opacity: 1, scale: 1, y: 0 }}
-              exit={
-                isMobile ? { y: "100%" } : { opacity: 0, scale: 0.96, y: -8 }
-              }
-              transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
-              className={`glass flex flex-col border-line shadow-2xl outline-none ${
-                isMobile
-                  ? "absolute inset-x-0 bottom-0 max-h-[85dvh] rounded-t-2xl border-t"
-                  : "absolute right-4 top-16 max-h-[calc(100dvh-5.5rem)] w-[min(360px,calc(100vw-2rem))] rounded-2xl border"
-              }`}
-            >
-              {isMobile && (
-                <div className="mx-auto mt-2 h-1 w-9 shrink-0 rounded-full bg-text-faint/40" />
-              )}
-              <SupportPanel onClose={close} />
-            </motion.div>
-          </motion.div>
+                {/* Panel */}
+                <motion.div
+                  ref={panelRef}
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label="Centro de soporte de E-Bus Control"
+                  tabIndex={-1}
+                  onClick={(e) => e.stopPropagation()}
+                  initial={
+                    isMobile
+                      ? { y: "100%" }
+                      : { opacity: 0, scale: 0.96, y: -8 }
+                  }
+                  animate={isMobile ? { y: 0 } : { opacity: 1, scale: 1, y: 0 }}
+                  exit={
+                    isMobile ? { y: "100%" } : { opacity: 0, scale: 0.96, y: -8 }
+                  }
+                  transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+                  className={`glass flex flex-col border-line shadow-2xl outline-none ${
+                    isMobile
+                      ? "absolute inset-x-0 bottom-0 max-h-[85dvh] rounded-t-2xl border-t pb-[env(safe-area-inset-bottom)]"
+                      : "absolute right-4 top-16 max-h-[calc(100dvh-5.5rem)] w-[min(360px,calc(100vw-2rem))] rounded-2xl border"
+                  }`}
+                >
+                  {isMobile && (
+                    <div className="mx-auto mt-2 h-1 w-9 shrink-0 rounded-full bg-text-faint/40" />
+                  )}
+                  <SupportPanel onClose={close} autoFocusSearch={!isMobile} />
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body,
         )}
-      </AnimatePresence>
     </>
   );
 }
