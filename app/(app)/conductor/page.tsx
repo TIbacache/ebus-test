@@ -37,7 +37,7 @@ function Stat({
         <Icon className="size-4" />
         <span className="text-xs font-medium">{label}</span>
       </div>
-      <p className={`tnum mt-2 text-2xl font-bold ${tone}`}>
+      <p className={`tnum mt-2 text-xl font-bold sm:text-2xl ${tone}`}>
         {value}
         {unit && <span className="ml-1 text-sm font-medium text-text-faint">{unit}</span>}
       </p>

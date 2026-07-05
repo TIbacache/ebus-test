@@ -34,11 +34,11 @@ export function Header({ onToggleSidebar }: { onToggleSidebar: () => void }) {
         <EcgLogo size={30} />
       </span>
 
-      <h1 className="truncate text-base font-semibold md:text-lg">
+      <h1 className="min-w-0 flex-1 truncate text-base font-semibold md:text-lg">
         {titleFor(pathname)}
       </h1>
 
-      <div className="ml-auto flex items-center gap-2">
+      <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
         <SupportButton />
 
         <ThemeToggle />

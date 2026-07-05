@@ -84,7 +84,7 @@ export default function ConfiguracionPage() {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 className="text-lg font-semibold">Configuración</h2>
           <p className="text-sm text-text-muted">
@@ -93,7 +93,7 @@ export default function ConfiguracionPage() {
         </div>
         <button
           onClick={guardar}
-          className={`inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors ${
+          className={`inline-flex w-full items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors sm:w-auto ${
             guardado
               ? "bg-healthy text-bg"
               : "bg-primary text-bg hover:bg-primary-hover"
@@ -243,7 +243,7 @@ export default function ConfiguracionPage() {
         title="Gestión de usuarios"
         desc="Roles activos en el sistema"
       >
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto scroll-x-shadow">
           <table className="w-full min-w-[420px] text-left text-sm">
             <thead>
               <tr className="border-b border-line text-xs uppercase tracking-wide text-text-faint">

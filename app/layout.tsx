@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -19,6 +19,14 @@ export const metadata: Metadata = {
     "Sistema de Monitoreo Inteligente de Baterías para Flotas de Buses Eléctricos — INACAP La Serena. El pulso de tu flota, en tiempo real.",
   applicationName: "E-Bus Control",
   authors: [{ name: "Equipo E-Bus Control — INACAP La Serena" }],
+};
+
+// Colorea la barra del navegador móvil según el esquema del SO (claro por defecto).
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#eef2f7" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0e1a" },
+  ],
 };
 
 // Aplica el tema guardado antes del primer paint (evita parpadeo). Default: claro.
