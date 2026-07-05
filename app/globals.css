@@ -23,6 +23,7 @@
   --street-line: rgba(15, 23, 42, 0.06);
   --avenida: rgba(15, 23, 42, 0.05);
   --glass-bg: rgba(255, 255, 255, 0.82);
+  --surface-fade: rgba(255, 255, 255, 0); /* mismo hue que --surface, alpha 0 */
 }
 
 .dark {
@@ -39,6 +40,7 @@
   --street-line: rgba(148, 163, 184, 0.08);
   --avenida: rgba(255, 255, 255, 0.03);
   --glass-bg: rgba(17, 24, 39, 0.82);
+  --surface-fade: rgba(17, 24, 39, 0); /* mismo hue que --surface, alpha 0 */
 }
 
 @theme inline {
@@ -139,6 +141,28 @@
   }
   .avenida {
     background-color: var(--avenida);
+  }
+  /* Sombra de scroll horizontal (técnica de fondos con background-attachment).
+     Aparece SOLO cuando el contenido desborda; se autooculta en los extremos.
+     Se aplica al contenedor .overflow-x-auto de las tablas anchas. */
+  .scroll-x-shadow {
+    background:
+      linear-gradient(to right, var(--color-surface) 30%, var(--surface-fade))
+        left center / 28px 100% no-repeat local,
+      linear-gradient(to left, var(--color-surface) 30%, var(--surface-fade))
+        right center / 28px 100% no-repeat local,
+      radial-gradient(
+          farthest-side at 0 50%,
+          rgba(2, 6, 23, 0.16),
+          transparent
+        )
+        left center / 14px 100% no-repeat,
+      radial-gradient(
+          farthest-side at 100% 50%,
+          rgba(2, 6, 23, 0.16),
+          transparent
+        )
+        right center / 14px 100% no-repeat;
   }
 }
 

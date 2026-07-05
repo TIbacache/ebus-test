@@ -131,7 +131,7 @@ export default function ReportesPage() {
         <div className="border-b border-line px-4 py-3">
           <h3 className="text-sm font-semibold">Incidencias por unidad</h3>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto scroll-x-shadow">
           <table className="w-full min-w-[420px] text-left text-sm">
             <thead>
               <tr className="border-b border-line text-xs uppercase tracking-wide text-text-faint">

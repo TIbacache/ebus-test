@@ -65,7 +65,7 @@ export default function FlotaPage() {
 
       {/* Tabla */}
       <div className="card overflow-hidden">
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto scroll-x-shadow">
           <table className="w-full min-w-[680px] text-left text-sm">
             <thead>
               <tr className="border-b border-line text-xs uppercase tracking-wide text-text-faint">

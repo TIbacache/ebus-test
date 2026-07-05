@@ -61,7 +61,7 @@ function Marker({
 export function FleetMap() {
   return (
     <div className="card overflow-hidden">
-      <div className="flex items-center justify-between border-b border-line px-4 py-3">
+      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 border-b border-line px-4 py-3">
         <div>
           <h3 className="text-sm font-semibold">Mapa en tiempo real</h3>
           <p className="text-xs text-text-faint">98 micros en recorrido — La Serena</p>
