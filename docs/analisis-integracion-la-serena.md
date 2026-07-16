@@ -158,6 +158,8 @@ Eco-feedback al conductor en cabina (los eventos ya vienen de Tracktec), módulo
 
 ## 6. Preguntas para Alejandro Vásquez
 
+> **Versión lista para enviar** (sin notas internas de estrategia): `docs/preguntas-alejandro-vasquez.md`. Esta versión es la interna, con el porqué de cada pregunta.
+
 **Gobernanza (define todo lo demás):**
 1. ¿Quién es la contraparte dueña de los datos: Eserco, Liserco, o pasan por la DTPR/MTT? ¿Qué rol juega la Asistencia Técnica en ese acceso? ¿Necesitamos NDA o convenio (p. ej. vía INACAP)?
 2. ¿Cuántas micros y cuánta historia podríamos usar para la prueba? ¿Desde noviembre 2024?
@@ -168,19 +170,20 @@ Eco-feedback al conductor en cabina (los eventos ya vienen de Tracktec), módulo
 5. ¿La flota participa del estudio de degradación Tracktec–DICTUC? ¿Les han entregado resultados?
 
 **Dhemax / Copec Voltex (el lado del enchufe):**
-6. ¿El CMS de El Sauce es Dhemax? ¿Qué entrega por sesión: kWh, curva de potencia, SOC inicial/final, duración? ¿Por API o reporte?
-7. ¿Cómo se programa hoy la carga (ventanas nocturnas, Smart Charging activo, carga de oportunidad diurna)? ¿Quién decide qué bus carga cuándo?
+6. ¿El CMS de El Sauce es Dhemax? ¿Qué entrega por sesión: kWh, curva de potencia, SOC inicial/final, duración, horario? ¿Se registra también la **temperatura del pack** al conectar (o esa solo la ve Tracktec)? ¿Por API o reporte?
+7. ¿Cómo se identifica **qué bus cargó en cada sesión** (RFID/idTag, bahía asignada por unidad, registro manual)? — Es la **llave del cruce** carga ↔ telemetría: sin identificación bus↔sesión confiable, el análisis del impacto de las cargas pierde su fundamento. Pregunta crítica.
+8. ¿Cómo se programa hoy la carga (ventanas nocturnas, Smart Charging activo, carga de oportunidad diurna)? ¿Quién decide qué bus carga cuándo?
 
 **Foton / Andes Motor / CATL:**
-8. ¿Condiciones de la garantía de batería (años/km y ventanas de operación de carga)? — el monitoreo sirve también para *demostrar compliance* de garantía, argumento directo para Eserco.
-9. ¿Andes Motor ofrece plataforma de monitoreo del fabricante o informes de SoH de posventa? ¿El T-Box GB/T 32960 está activo y reportando a alguien?
+9. ¿Condiciones de la garantía de batería (años/km y ventanas de operación de carga)? — el monitoreo sirve también para *demostrar compliance* de garantía, argumento directo para Eserco.
+10. ¿Andes Motor ofrece plataforma de monitoreo del fabricante o informes de SoH de posventa? ¿El T-Box GB/T 32960 está activo y reportando a alguien?
 
 **Taller y operación:**
-10. ¿Cómo registran hoy las mantenciones y fallas: sistema, planilla, WhatsApp? ¿Cuántos mecánicos y qué protocolo ante falla en ruta?
-11. ¿Qué pregunta les gustaría responder primero con datos? (ej.: ¿cuánto degrada una carga rápida en día caluroso vs nocturna?) ¿Qué KPI le importa al directorio: costo/km, disponibilidad, fecha de reemplazo de packs?
+11. ¿Cómo registran hoy las mantenciones y fallas: sistema, planilla, WhatsApp? ¿Cuántos mecánicos y qué protocolo ante falla en ruta?
+12. ¿Qué pregunta les gustaría responder primero con datos? (ej.: ¿cuánto degrada una carga rápida en día caluroso vs nocturna?) ¿Qué KPI le importa al directorio: costo/km, disponibilidad, fecha de reemplazo de packs?
 
 **Datos personales:**
-12. Proponer de entrada: Eco-Score anonimizado/agregado en el piloto (Ley 21.719 + contexto gremial). ¿Hay que conversarlo con el sindicato/asociación?
+13. Proponer de entrada: Eco-Score anonimizado/agregado en el piloto (Ley 21.719 + contexto gremial). ¿Hay que conversarlo con el sindicato/asociación?
 
 ---
 
