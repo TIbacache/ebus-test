@@ -151,6 +151,10 @@ export const faqItems: FaqItem[] = [
     a: "Cada micro se pinta según su carga y salud: verde = Saludable, verde-lima = Normal, naranja = Advertencia (bajo ~35%) y rojo = Alerta crítica (bajo ~20%). Los umbrales son configurables en Configuración › Umbrales de alerta.",
   },
   {
+    q: "¿Qué diferencia hay entre “Batería” y “Salud (SoH)”?",
+    a: "Batería (SOC) es la carga de hoy: cuánta energía queda para el turno, como el estanque de combustible. Salud (SoH) es la capacidad que el pack conserva tras meses de uso: el corazón de largo plazo. Una micro puede andar con 15% de carga y estar perfectamente sana, o cargar al 100% con un pack enfermo. E-Bus Control muestra ambas por separado y proyecta cuándo cada pack cruzará el umbral de reemplazo (70% SoH).",
+  },
+  {
     q: "¿Por qué MIC-104 aparece con un badge rojo pulsante?",
     a: "Es el caso crítico activo: 15% de batería y falla de “Tensión de Celda Baja (Crítico)” en Av. Central con San Martín. El pulso rojo replica la metáfora del monitor cardíaco: una “arritmia” de la flota que exige atención inmediata.",
   },

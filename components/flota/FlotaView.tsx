@@ -2,9 +2,9 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Eye, ArrowDownUp } from "lucide-react";
+import { Eye, ArrowDownUp, HeartPulse } from "lucide-react";
 import type { Estado, Unidad } from "@/lib/types";
-import { estadoConfig } from "@/lib/constants";
+import { estadoConfig, estadoDesdeSoH } from "@/lib/constants";
 import { StatusDot } from "@/components/ui/StatusDot";
 import { BatteryBar } from "@/components/ui/BatteryBar";
 import { AlertBadge } from "@/components/ui/AlertBadge";
@@ -72,13 +72,14 @@ export function FlotaView({
       {/* Tabla */}
       <div className="card overflow-hidden">
         <div className="overflow-x-auto scroll-x-shadow">
-          <table className="w-full min-w-[680px] text-left text-sm">
+          <table className="w-full min-w-[760px] text-left text-sm">
             <thead>
               <tr className="border-b border-line text-xs uppercase tracking-wide text-text-faint">
                 <th className="px-4 py-3 font-medium">Unidad</th>
                 <th className="px-4 py-3 font-medium">Conductor</th>
                 <th className="px-4 py-3 font-medium">Ruta</th>
                 <th className="px-4 py-3 font-medium">Batería</th>
+                <th className="px-4 py-3 font-medium">Salud (SoH)</th>
                 <th className="px-4 py-3 font-medium">Estado</th>
                 <th className="px-4 py-3 font-medium">Actualización</th>
                 <th className="px-4 py-3 text-right font-medium">Acciones</th>
@@ -108,6 +109,18 @@ export function FlotaView({
                         estado={u.estado}
                         className="w-36"
                       />
+                    </td>
+                    <td className="px-4 py-3">
+                      {u.soh != null ? (
+                        <span
+                          className={`tnum inline-flex items-center gap-1.5 font-semibold ${estadoConfig[estadoDesdeSoH(u.soh)].text}`}
+                        >
+                          <HeartPulse className="size-3.5" />
+                          {u.soh}%
+                        </span>
+                      ) : (
+                        <span className="text-xs text-text-faint">—</span>
+                      )}
                     </td>
                     <td className="px-4 py-3">
                       {u.estado === "critical" ? (

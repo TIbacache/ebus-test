@@ -121,6 +121,10 @@ export function ReportesView({
               yKey="score"
             />
           </div>
+          <p className="mt-2 text-[11px] text-text-faint">
+            En el piloto real: datos anonimizados o agregados por flota (Ley
+            21.719 de protección de datos personales).
+          </p>
         </div>
 
         <div className="card p-4">

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import {
   ArrowLeft,
   Battery,
+  HeartPulse,
   Zap,
   Thermometer,
   Activity,
@@ -12,7 +13,7 @@ import {
 } from "lucide-react";
 import { getAlertasPrevias, getDegradacion30d, getUnidad } from "@/lib/api";
 import type { Estado } from "@/lib/types";
-import { estadoConfig } from "@/lib/constants";
+import { estadoConfig, estadoDesdeSoH, umbralEolSoH } from "@/lib/constants";
 import { AlertBadge } from "@/components/ui/AlertBadge";
 import { StatusDot } from "@/components/ui/StatusDot";
 import { DegradationChart } from "@/components/charts/DegradationChart";
@@ -121,10 +122,17 @@ export default async function DetalleUnidadPage({
         </div>
       )}
 
-      {/* Telemetría */}
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      {/* Telemetría — salud (largo plazo) separada de carga (el día) */}
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
         <Stat
-          label="Batería"
+          label="Salud (SoH)"
+          value={u.soh ?? "—"}
+          unit="%"
+          icon={HeartPulse}
+          tone={u.soh != null ? estadoConfig[estadoDesdeSoH(u.soh)].text : "text-text"}
+        />
+        <Stat
+          label="Carga actual (SOC)"
           value={u.bateria}
           unit="%"
           icon={Battery}
@@ -152,8 +160,17 @@ export default async function DetalleUnidadPage({
             <Activity className="size-4 text-text-faint" />
           </div>
           <div className="h-64 w-full">
-            <DegradationChart data={serie} color={tokenColor[u.estado]} />
+            <DegradationChart
+              data={serie}
+              color={tokenColor[u.estado]}
+              umbral={umbralEolSoH}
+            />
           </div>
+          <p className="mt-2 text-xs text-text-faint">
+            {u.soh != null && u.soh < umbralEolSoH
+              ? `Bajo el umbral de reemplazo (${umbralEolSoH}% SoH) — planificar evaluación del pack · proyección modelo v0 (demo)`
+              : `Proyección: cruza el umbral de reemplazo (${umbralEolSoH}% SoH) en ~${u.mesesHastaUmbral ?? "—"} meses · modelo v0 (demo)`}
+          </p>
         </div>
 
         <div className="card overflow-hidden">

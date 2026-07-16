@@ -1,5 +1,12 @@
 import Link from "next/link";
-import { Bus, Route, TriangleAlert, Wrench, ChevronRight } from "lucide-react";
+import {
+  Bus,
+  Route,
+  TriangleAlert,
+  Wrench,
+  ChevronRight,
+  HeartPulse,
+} from "lucide-react";
 import { KPICard } from "@/components/ui/KPICard";
 import { FleetPulse } from "@/components/dashboard/FleetPulse";
 import { OdsImpact } from "@/components/dashboard/OdsImpact";
@@ -13,7 +20,7 @@ import {
   getFleetSummary,
   getUnidades,
 } from "@/lib/api";
-import { estadoConfig } from "@/lib/constants";
+import { estadoConfig, estadoDesdeSoH } from "@/lib/constants";
 
 export default async function DashboardPage() {
   const [fleetSummary, unidades, alertasActivas, fallasEvitadas] =
@@ -110,6 +117,15 @@ export default async function DashboardPage() {
                         estado={u.estado}
                         className="flex-1"
                       />
+                      {u.soh != null && (
+                        <span
+                          className={`tnum hidden w-16 shrink-0 items-center justify-end gap-1 text-xs font-semibold lg:flex ${estadoConfig[estadoDesdeSoH(u.soh)].text}`}
+                          title="Salud de la batería (SoH)"
+                        >
+                          <HeartPulse className="size-3" />
+                          {u.soh}%
+                        </span>
+                      )}
                       <span
                         className={`hidden w-24 shrink-0 text-right text-xs font-medium sm:block ${c.text}`}
                       >

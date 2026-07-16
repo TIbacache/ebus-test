@@ -17,6 +17,11 @@ export interface Unidad {
   bateria: number;
   /** SoH — Estado de Salud (%): capacidad restante vs. nominal, largo plazo. */
   soh?: number;
+  /**
+   * Proyección demo (modelo v0): meses hasta cruzar el umbral de reemplazo
+   * (70% SoH). 0 = ya está bajo el umbral. En live la calcula el motor de análisis.
+   */
+  mesesHastaUmbral?: number;
   estado: Estado;
   conductor: string;
   ruta: string;

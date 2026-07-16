@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Bell, UserRound } from "lucide-react";
+import { Menu, Bell, UserRound, FlaskConical } from "lucide-react";
 import { navItems } from "@/lib/constants";
 import { EcgLogo } from "@/components/ui/EcgLogo";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
@@ -39,6 +39,15 @@ export function Header({ onToggleSidebar }: { onToggleSidebar: () => void }) {
       </h1>
 
       <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
+        <span
+          title="Prototipo con datos simulados — la arquitectura ya está lista para conectar datos reales (modo live)."
+          className="inline-flex shrink-0 cursor-help items-center gap-1 rounded-full border border-primary/30 bg-primary/10 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-primary"
+        >
+          <FlaskConical className="size-3" />
+          <span className="hidden sm:inline">Demo · datos simulados</span>
+          <span className="sm:hidden">Demo</span>
+        </span>
+
         <SupportButton />
 
         <ThemeToggle />
