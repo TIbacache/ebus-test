@@ -1,5 +1,5 @@
 import { estadoConfig } from "@/lib/constants";
-import type { Estado } from "@/lib/data";
+import type { Estado } from "@/lib/types";
 
 /** Punto indicador semáforo. Pulsa si es crítico. */
 export function StatusDot({

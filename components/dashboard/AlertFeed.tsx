@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { ChevronRight, MapPin } from "lucide-react";
-import { alertasActivas } from "@/lib/data";
 import { estadoConfig } from "@/lib/constants";
 import { StatusDot } from "@/components/ui/StatusDot";
+import type { Alerta } from "@/lib/types";
 
-export function AlertFeed() {
+export function AlertFeed({ alertasActivas }: { alertasActivas: Alerta[] }) {
   return (
     <div className="card flex flex-col">
       <div className="flex items-center justify-between border-b border-line px-4 py-3">

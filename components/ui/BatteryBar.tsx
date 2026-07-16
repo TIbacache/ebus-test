@@ -1,5 +1,5 @@
 import { estadoConfig, estadoDesdeBateria } from "@/lib/constants";
-import type { Estado } from "@/lib/data";
+import type { Estado } from "@/lib/types";
 
 /** Barra de batería con color semáforo según umbral. */
 export function BatteryBar({

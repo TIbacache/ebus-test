@@ -4,13 +4,19 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { HeartPulse, Activity, TriangleAlert } from "lucide-react";
-import { fleetSummary, unidades } from "@/lib/data";
+import type { FleetSummary, Unidad } from "@/lib/types";
 
 // Trace ECG de 4 latidos (baseline y=24). Se estira a lo ancho del banner.
 const ECG_PATH =
   "M0 24 H30 l4 -14 l6 26 l5 -18 l4 6 H90 l4 -14 l6 26 l5 -18 l4 6 H150 l4 -14 l6 26 l5 -18 l4 6 H210 l4 -14 l6 26 l5 -18 l4 6 H240";
 
-export function FleetPulse() {
+export function FleetPulse({
+  fleetSummary,
+  unidades,
+}: {
+  fleetSummary: FleetSummary;
+  unidades: Unidad[];
+}) {
   const reduce = useReducedMotion();
   const critica = unidades.find((u) => u.estado === "critical");
   const [bpm, setBpm] = useState(72);

@@ -1,6 +1,6 @@
 import { TriangleAlert } from "lucide-react";
 import { estadoConfig } from "@/lib/constants";
-import type { Estado } from "@/lib/data";
+import type { Estado } from "@/lib/types";
 
 /** Badge semáforo. Pulsa (anillo rojo) cuando es crítico. */
 export function AlertBadge({

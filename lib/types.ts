@@ -60,3 +60,77 @@ export interface Alerta {
   detectada: string; // hora
   estadoAlerta: "Atención Requerida" | "En atención" | "Notificado";
 }
+
+/** Hito de la línea de tiempo de una alerta. */
+export interface HitoTimelineAlerta {
+  label: string;
+  hora: string;
+  done: boolean;
+  active?: boolean;
+}
+
+/** Alerta previa en el historial corto de una unidad. */
+export interface AlertaPrevia {
+  fecha: string;
+  tipo: string;
+  severidad: Estado;
+  resuelto: boolean;
+}
+
+export interface AlertaResuelta {
+  id: string;
+  unidad: string;
+  tipo: string;
+  severidad: Estado;
+  fecha: string;
+  resolucion: string;
+}
+
+export interface SolicitudMecanico {
+  unidad: string;
+  conductor: string;
+  ubicacion: string;
+  tipoFalla: string;
+  bateria: number;
+  eta: number;
+  prioridad: string;
+  descripcion: string;
+}
+
+export interface IntervencionMecanico {
+  unidad: string;
+  fecha: string;
+  trabajo: string;
+  duracion: string;
+}
+
+/**
+ * Eco-score de un día (histórico semanal del conductor).
+ * Type alias (no interface) a propósito: la index signature implícita
+ * lo hace asignable al `Row` genérico de los charts.
+ */
+export type EcoScoreDia = { dia: string; score: number };
+
+/** Eco-score promedio por conductor. Type alias por la misma razón. */
+export type EcoScoreConductor = { conductor: string; score: number };
+
+export interface IncidenciasUnidad {
+  unidad: string;
+  incidencias: number;
+  criticas: number;
+}
+
+/** Punto semanal de la tendencia de salud de la flota. */
+export interface PuntoTendenciaFlota {
+  semana: string;
+  salud: number;
+}
+
+/** Fila del dataset multi-unidad de degradación (`dia` + SoH por unidad). */
+export type FilaDegradacionFlota = Record<string, number>;
+
+export interface UsuarioSistema {
+  nombre: string;
+  rol: string;
+  estado: "Activo" | "Inactivo";
+}

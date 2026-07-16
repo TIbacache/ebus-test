@@ -6,13 +6,31 @@
 // Tracktec/Dhemax — ver docs/analisis-integracion-la-serena.md §4).
 //
 // Flag: NEXT_PUBLIC_DATA_SOURCE = "demo" | "live".
-// Contenido puramente presentacional (tips, timeline del caso
-// demo, colores) sigue viviendo en lib/data.ts hasta que Fase 1
-// le defina fuente real.
+//
+// Fuera del contrato (importar directo de lib/data.ts): contenido
+// demo puramente presentacional — tipsConduccion, modoConduccion,
+// unidadLineColor y el índice de búsqueda de Soporte (helpContent).
+// Fase 1 les definirá fuente real si corresponde.
 // ============================================================
 
 import * as demo from "./data";
-import type { Alerta, FleetSummary, PuntoSoH, Unidad } from "./types";
+import type {
+  Alerta,
+  AlertaPrevia,
+  AlertaResuelta,
+  EcoScoreConductor,
+  EcoScoreDia,
+  FilaDegradacionFlota,
+  FleetSummary,
+  HitoTimelineAlerta,
+  IncidenciasUnidad,
+  IntervencionMecanico,
+  PuntoSoH,
+  PuntoTendenciaFlota,
+  SolicitudMecanico,
+  Unidad,
+  UsuarioSistema,
+} from "./types";
 
 export type DataSourceMode = "demo" | "live";
 
@@ -32,15 +50,19 @@ export interface DataSource {
   getUnidad(id: string): Promise<Unidad | undefined>;
   /** Serie SoH 30 días de una unidad. En live: SoH estimado propio, no el del BMS (H4). */
   getDegradacion30d(unidadId: string): Promise<PuntoSoH[]>;
-  getDegradacionFlota(): Promise<typeof demo.degradacionFlota>;
-  getTendenciaSaludFlota(): Promise<typeof demo.tendenciaSaludFlota>;
+  getDegradacionFlota(): Promise<FilaDegradacionFlota[]>;
+  getTendenciaSaludFlota(): Promise<PuntoTendenciaFlota[]>;
   getAlertasActivas(): Promise<Alerta[]>;
-  getAlertasResueltas(): Promise<typeof demo.alertasResueltas>;
-  getSolicitudMecanico(): Promise<typeof demo.solicitudMecanico>;
-  getHistorialMecanico(): Promise<typeof demo.historialMecanico>;
-  getEcoScore7d(): Promise<typeof demo.ecoScore7d>;
-  getEcoScorePorConductor(): Promise<typeof demo.ecoScorePorConductor>;
-  getIncidenciasPorUnidad(): Promise<typeof demo.incidenciasPorUnidad>;
+  getAlertasResueltas(): Promise<AlertaResuelta[]>;
+  getTimelineAlerta(alertaId: string): Promise<HitoTimelineAlerta[]>;
+  getAlertasPrevias(unidadId: string): Promise<AlertaPrevia[]>;
+  getSolicitudMecanico(): Promise<SolicitudMecanico>;
+  getHistorialMecanico(): Promise<IntervencionMecanico[]>;
+  getEcoScore7d(): Promise<EcoScoreDia[]>;
+  getEcoScorePorConductor(): Promise<EcoScoreConductor[]>;
+  getIncidenciasPorUnidad(): Promise<IncidenciasUnidad[]>;
+  getFallasEvitadas(): Promise<number>;
+  getUsuariosSistema(): Promise<UsuarioSistema[]>;
 }
 
 const demoSource: DataSource = {
@@ -52,11 +74,22 @@ const demoSource: DataSource = {
   getTendenciaSaludFlota: async () => demo.tendenciaSaludFlota,
   getAlertasActivas: async () => demo.alertasActivas,
   getAlertasResueltas: async () => demo.alertasResueltas,
+  // El demo solo tiene timeline/historial para el caso activo (MIC-104).
+  getTimelineAlerta: async (alertaId) =>
+    demo.alertasActivas.some(
+      (a) => a.id === alertaId && a.estadoUnidad === "critical",
+    )
+      ? demo.timelineMic104
+      : [],
+  getAlertasPrevias: async (unidadId) =>
+    unidadId.toUpperCase() === "MIC-104" ? demo.alertasPreviasMic104 : [],
   getSolicitudMecanico: async () => demo.solicitudMecanico,
   getHistorialMecanico: async () => demo.historialMecanico,
   getEcoScore7d: async () => demo.ecoScore7d,
   getEcoScorePorConductor: async () => demo.ecoScorePorConductor,
   getIncidenciasPorUnidad: async () => demo.incidenciasPorUnidad,
+  getFallasEvitadas: async () => demo.fallasEvitadas,
+  getUsuariosSistema: async () => demo.usuariosSistema,
 };
 
 function noImplementado(metodo: string): never {
@@ -74,11 +107,15 @@ const liveSource: DataSource = {
   getTendenciaSaludFlota: async () => noImplementado("getTendenciaSaludFlota"),
   getAlertasActivas: async () => noImplementado("getAlertasActivas"),
   getAlertasResueltas: async () => noImplementado("getAlertasResueltas"),
+  getTimelineAlerta: async () => noImplementado("getTimelineAlerta"),
+  getAlertasPrevias: async () => noImplementado("getAlertasPrevias"),
   getSolicitudMecanico: async () => noImplementado("getSolicitudMecanico"),
   getHistorialMecanico: async () => noImplementado("getHistorialMecanico"),
   getEcoScore7d: async () => noImplementado("getEcoScore7d"),
   getEcoScorePorConductor: async () => noImplementado("getEcoScorePorConductor"),
   getIncidenciasPorUnidad: async () => noImplementado("getIncidenciasPorUnidad"),
+  getFallasEvitadas: async () => noImplementado("getFallasEvitadas"),
+  getUsuariosSistema: async () => noImplementado("getUsuariosSistema"),
 };
 
 /** Fuente activa según el flag. Las pantallas deben usar esto (o los atajos). */
@@ -98,6 +135,10 @@ export const getTendenciaSaludFlota = () =>
   getDataSource().getTendenciaSaludFlota();
 export const getAlertasActivas = () => getDataSource().getAlertasActivas();
 export const getAlertasResueltas = () => getDataSource().getAlertasResueltas();
+export const getTimelineAlerta = (alertaId: string) =>
+  getDataSource().getTimelineAlerta(alertaId);
+export const getAlertasPrevias = (unidadId: string) =>
+  getDataSource().getAlertasPrevias(unidadId);
 export const getSolicitudMecanico = () => getDataSource().getSolicitudMecanico();
 export const getHistorialMecanico = () => getDataSource().getHistorialMecanico();
 export const getEcoScore7d = () => getDataSource().getEcoScore7d();
@@ -105,3 +146,5 @@ export const getEcoScorePorConductor = () =>
   getDataSource().getEcoScorePorConductor();
 export const getIncidenciasPorUnidad = () =>
   getDataSource().getIncidenciasPorUnidad();
+export const getFallasEvitadas = () => getDataSource().getFallasEvitadas();
+export const getUsuariosSistema = () => getDataSource().getUsuariosSistema();

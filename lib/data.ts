@@ -5,9 +5,43 @@
 // Tipos del dominio en lib/types.ts; acceso vía lib/api.ts.
 // ============================================================
 
-import type { Alerta, Estado, FleetSummary, PuntoSoH, Unidad } from "./types";
+import type {
+  Alerta,
+  AlertaPrevia,
+  AlertaResuelta,
+  EcoScoreConductor,
+  EcoScoreDia,
+  Estado,
+  FilaDegradacionFlota,
+  FleetSummary,
+  HitoTimelineAlerta,
+  IncidenciasUnidad,
+  IntervencionMecanico,
+  PuntoSoH,
+  PuntoTendenciaFlota,
+  SolicitudMecanico,
+  Unidad,
+  UsuarioSistema,
+} from "./types";
 
-export type { Alerta, Estado, FleetSummary, PuntoSoH, Unidad } from "./types";
+export type {
+  Alerta,
+  AlertaPrevia,
+  AlertaResuelta,
+  EcoScoreConductor,
+  EcoScoreDia,
+  Estado,
+  FilaDegradacionFlota,
+  FleetSummary,
+  HitoTimelineAlerta,
+  IncidenciasUnidad,
+  IntervencionMecanico,
+  PuntoSoH,
+  PuntoTendenciaFlota,
+  SolicitudMecanico,
+  Unidad,
+  UsuarioSistema,
+} from "./types";
 
 export const fleetSummary: FleetSummary = {
   total: 120,
@@ -132,7 +166,7 @@ export const degradacion30d: Record<string, PuntoSoH[]> = {
 };
 
 /** Tendencia de salud general de la flota (sube = mejora por monitoreo). */
-export const tendenciaSaludFlota = Array.from({ length: 12 }, (_, i) => ({
+export const tendenciaSaludFlota: PuntoTendenciaFlota[] = Array.from({ length: 12 }, (_, i) => ({
   semana: `S${i + 1}`,
   salud: Math.round((78 + (91 - 78) * (i / 11) + wobble(i, 0.8)) * 10) / 10,
 }));
@@ -179,7 +213,7 @@ export const alertasActivas: Alerta[] = [
 ];
 
 /** Timeline de la alerta de MIC-104. */
-export const timelineMic104 = [
+export const timelineMic104: HitoTimelineAlerta[] = [
   { label: "Detectada", hora: "14:32", done: true },
   { label: "Notificada a Centro de Control", hora: "14:32", done: true },
   { label: "Mecánico asignado", hora: "14:34", done: true },
@@ -188,7 +222,7 @@ export const timelineMic104 = [
 ];
 
 /** Historial de alertas previas de MIC-104. */
-export const alertasPreviasMic104 = [
+export const alertasPreviasMic104: AlertaPrevia[] = [
   { fecha: "12 jun", tipo: "Temperatura de celda elevada", severidad: "warning" as Estado, resuelto: true },
   { fecha: "28 may", tipo: "Caída de tensión transitoria", severidad: "warning" as Estado, resuelto: true },
   { fecha: "09 may", tipo: "Desbalance de celdas", severidad: "critical" as Estado, resuelto: true },
@@ -196,7 +230,7 @@ export const alertasPreviasMic104 = [
 ];
 
 /** Historial de alertas resueltas (centro de alertas). */
-export const alertasResueltas = [
+export const alertasResueltas: AlertaResuelta[] = [
   { id: "ALT-2030", unidad: "MIC-118", tipo: "Batería baja", severidad: "warning" as Estado, fecha: "Hoy 11:20", resolucion: "Recarga programada" },
   { id: "ALT-2028", unidad: "MIC-104", tipo: "Temperatura elevada", severidad: "warning" as Estado, fecha: "Hoy 09:48", resolucion: "Enfriamiento OK" },
   { id: "ALT-2025", unidad: "MIC-107", tipo: "Desbalance de celdas", severidad: "critical" as Estado, fecha: "Ayer 18:02", resolucion: "Mantención en taller" },
@@ -211,7 +245,7 @@ export const alertasResueltas = [
 
 // ---- Mecánico -------------------------------------------------------------
 
-export const solicitudMecanico = {
+export const solicitudMecanico: SolicitudMecanico = {
   unidad: "MIC-104",
   conductor: "Pedro Flores",
   ubicacion: "Av. Central con San Martín",
@@ -223,7 +257,7 @@ export const solicitudMecanico = {
     "Unidad detenida con tensión de celda crítica. Requiere inspección del módulo B (celda 7) y evaluación de reemplazo.",
 };
 
-export const historialMecanico = [
+export const historialMecanico: IntervencionMecanico[] = [
   { unidad: "MIC-107", fecha: "Hoy 09:10", trabajo: "Reemplazo de módulo de batería", duracion: "1h 20m" },
   { unidad: "MIC-145", fecha: "Ayer 17:05", trabajo: "Calibración de BMS", duracion: "45m" },
   { unidad: "MIC-133", fecha: "Ayer 12:30", trabajo: "Diagnóstico de descarga acelerada", duracion: "1h" },
@@ -233,7 +267,7 @@ export const historialMecanico = [
 // ---- Conductor / Eco-score ------------------------------------------------
 
 /** Eco-score últimos 7 días (conductor del caso activo). */
-export const ecoScore7d = [
+export const ecoScore7d: EcoScoreDia[] = [
   { dia: "Lun", score: 72 },
   { dia: "Mar", score: 65 },
   { dia: "Mié", score: 58 },
@@ -268,7 +302,7 @@ export const tipsConduccion = [
 
 // ---- Reportes -------------------------------------------------------------
 
-export const ecoScorePorConductor = [
+export const ecoScorePorConductor: EcoScoreConductor[] = [
   { conductor: "Carlos Muñoz", score: 88 },
   { conductor: "Jorge Pérez", score: 74 },
   { conductor: "Luis Torres", score: 61 },
@@ -276,7 +310,7 @@ export const ecoScorePorConductor = [
   { conductor: "Mario Díaz", score: 83 },
 ];
 
-export const incidenciasPorUnidad = [
+export const incidenciasPorUnidad: IncidenciasUnidad[] = [
   { unidad: "MIC-101", incidencias: 1, criticas: 0 },
   { unidad: "MIC-102", incidencias: 2, criticas: 0 },
   { unidad: "MIC-103", incidencias: 4, criticas: 1 },
@@ -298,8 +332,8 @@ export const unidadLineColor: Record<string, string> = {
 };
 
 /** Degradación de toda la flota en un único dataset (multi-línea). */
-export const degradacionFlota = degradacion30d["MIC-101"].map((_, i) => {
-  const row: Record<string, number> = { dia: i + 1 };
+export const degradacionFlota: FilaDegradacionFlota[] = degradacion30d["MIC-101"].map((_, i) => {
+  const row: FilaDegradacionFlota = { dia: i + 1 };
   for (const id of Object.keys(degradacion30d)) {
     row[id] = degradacion30d[id][i].soh;
   }
@@ -312,10 +346,10 @@ export const modoConduccion = "Normal";
 
 // ---- Configuración: usuarios del sistema ----------------------------------
 
-export const usuariosSistema = [
+export const usuariosSistema: UsuarioSistema[] = [
   { nombre: "Tomás Ibacache", rol: "Administrador", estado: "Activo" },
   { nombre: "Operador 01", rol: "Operador", estado: "Activo" },
   { nombre: "Juan Silva", rol: "Mecánico", estado: "Activo" },
   { nombre: "Pedro Flores", rol: "Conductor", estado: "Activo" },
   { nombre: "Carla Núñez", rol: "Operador", estado: "Inactivo" },
-] as const;
+];
