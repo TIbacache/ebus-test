@@ -2,7 +2,7 @@
 
 > Investigación y diseño (julio 2026) para conectar el prototipo a las micros reales, los talleres y las bahías de carga de La Serena–Coquimbo. Complementa `resumen-ejecutivo-ebus-control.md` (documento para reenviar) y `pitch-3min-ebus.md` (guion del video).
 >
-> **Origen:** respuesta del encargado de las micros eléctricas — "miden el SOH (Tracktec, Copec a través de Dhemax), pero solo como dato; ninguno alcanza cálculos exactos del impacto de las cargas o la degradación por operación" — y su oferta de hacer pruebas con los buses de La Serena, sujeta a Alejandro Vásquez (jefe de A.T.).
+> **Origen:** respuesta del encargado de las micros eléctricas — en el mercado "hay que miden el SOH" (nombró a Tracktec y a "Copec a través de Dhemax"), pero "solo como dato": ninguno alcanza cálculos exactos del impacto de las cargas o la degradación por operación. **Ojo: nombró quiénes miden SOH en el mercado — NUNCA aseguró cuál usa su flota** (lo resuelven las preguntas 3 y 6). Más su oferta de hacer pruebas con los buses de La Serena, sujeta a Alejandro Vásquez (jefe de A.T.).
 
 ---
 
@@ -12,9 +12,9 @@
 |---|---|
 | **Flota** | 42 buses **Foton U9**: motor 245 kW, batería **CATL LFP de 229 kWh**, ~280 km de autonomía. Servicios **E-01** (El Sauce–El Romero) y **E-02** (La Pampilla–Av. Viña del Mar, extendido a El Sauce en abril 2025). ~26 km por trayecto, ~8.000 pasajeros/día, 326 salidas en día laboral. Operando desde el **29 de noviembre de 2024** |
 | **Operador** | **Eserco** (Empresa de Electromovilidad La Serena Coquimbo), creada por **Liserco** (asociación gremial de dueños de microbuses). 25 conductoras mujeres en la operación |
-| **Bahías de carga** | Electroterminal **El Sauce** (Coquimbo): 11 cargadores que cargan hasta **22 buses en paralelo** (duales), potencia mínima 1,35 MW. Infraestructura **Copec Voltex** |
-| **Telemetría del bus** | **Tracktec** (Suite con módulos de monitoreo de flota, telemetría mecánica, gestión de fallas y transporte público; +350 eBuses servidos en Chile). Integración vía web services — las specs no son públicas, se solicitan por su mesa de soporte |
-| **Gestión de carga** | **Dhemax** (socio tecnológico de Copec Voltex): CMS bajo **OCPP 1.6**, gestiona +1.200 eBuses/día y 60.000 cargas/mes en Latam y Europa. Ya se integran con terceros (ej. Optibus para planes de carga) — abrir datos a integradores es parte de su modelo |
+| **Bahías de carga** | Electroterminal **El Sauce** (Coquimbo): 11 cargadores duales que cargan hasta **22 buses en paralelo**, potencia mínima 1,35 MW. **Propiedad y operación de Liserco/Eserco** (inversión propia ~US$2M en terrenos de Liserco, 25 personas); la **infraestructura eléctrica la construyó Enel** ("con ellos firmé" — presidente de Liserco en prensa) y el empalme lo autorizó **CGE**. **Quién gestiona la carga (CMS) está por confirmar**: el encargado menciona "Copec a través de Dhemax", consistente con un rol de software/medición, no de propiedad |
+| **Telemetría del bus** | **Qué plataforma usa Eserco está POR CONFIRMAR** (pregunta 3): los U9 traen GPS/telemetría a bordo y el contrato exige gestión de flota, pero el proveedor no está publicado. El encargado nombró a **Tracktec** como quien mide SOH *en el mercado* (Suite con módulos de monitoreo, telemetría mecánica y gestión de fallas; +350 eBuses en Chile; web services no públicos) — candidato natural, **no confirmado como el de la flota** |
+| **Gestión de carga** | **Dhemax** (socio tecnológico de Copec Voltex): CMS bajo **OCPP 1.6**, gestiona +1.200 eBuses/día y 60.000 cargas/mes en Latam y Europa. Ya se integran con terceros (ej. Optibus para planes de carga) — abrir datos a integradores es parte de su modelo. **Ojo:** el encargado los nombró como quienes miden SOH *en el mercado* ("Copec a través de Dhemax") — **sin asegurar que la flota los use**; su rol en El Sauce es hipótesis (preguntas 6–7) |
 | **El fabricante** | Los buses chinos nacen con T-Box bajo la norma **GB/T 32960** (reporta cada pocos segundos: SOC, tensión/corriente total, tensiones máx/mín de celda con su posición, temperaturas por sonda, alarmas). En unidades exportadas ese flujo suele apuntar al fabricante/distribuidor (**Andes Motor**) o estar inactivo — fuente potencial que nadie está usando; hay que preguntar |
 | **Contexto de crecimiento** | Licitaciones 2025–2026: ~895 buses eléctricos regionales nuevos, con 14 electroterminales adjudicados a Copec Voltex (~70% de los puntos nuevos). El diseño multi-flota no es teórico: el mercado regional se está multiplicando ahora |
 
@@ -24,7 +24,7 @@ Tracktec mantiene desde 2023 un **estudio de degradación de baterías con DICTU
 
 La ventaja de E-Bus Control **no** es tener el dato (nunca lo tendremos mejor que Tracktec):
 
-1. **El cruce ruta × enchufe.** Tracktec ve la operación (no ve el detalle de la carga); Dhemax ve la carga (no ve la ruta). Cada uno tiene la mitad de la vida de la batería. El cálculo que falta —cuánto degrada cada sesión de carga y cada jornada de operación— sale de cruzar ambos, y ninguno puede hacerlo solo.
+1. **El cruce ruta × enchufe.** La telemetría del vehículo (sea Tracktec u otra) ve la operación, no el detalle de la carga; el CMS del terminal (¿Dhemax?) ve la carga, no la ruta. Cada uno tiene la mitad de la vida de la batería. El cálculo que falta —cuánto degrada cada sesión de carga y cada jornada de operación— sale de cruzar ambos, y ninguno puede hacerlo solo. **El argumento no depende de qué proveedores sean.**
 2. **La capa de acción.** Alertas → mecánico con ETA, eco-feedback al conductor, ventana óptima de carga: interfaces por rol que ninguno de los dos ofrece.
 3. **Foco local.** Un equipo en La Serena iterando con la flota de La Serena.
 
@@ -38,6 +38,8 @@ Auditoría del prototipo (spec `prompt-maestro-ebus-v2.md` + código) contra el 
 
 ### H1 — SOC y SoH están fundidos en un solo campo (el hallazgo más importante)
 `Unidad.bateria: 15%` dispara `estado: critical` y todo el relato de salud. Pero son cosas distintas: un U9 con **15% de carga (SOC)** al final del día es una micro normal llegando a El Sauce; un U9 con **85% de salud (SoH)** al año de uso es una emergencia silenciosa. El semáforo actual es de SOC (operación del día); la tesis del proyecto es de SoH (degradación). El modelo de datos real necesita **ambos campos** y el dashboard necesita **las dos vistas** (operación / salud).
+
+> **Resuelto (jul 2026):** la UI ahora separa **"Salud (SoH)"** de **"Carga actual (SOC)"** con semáforo de salud propio (<55 crítico · <70 zona de reemplazo · <85 normal · ≥85 sano) en Flota, Detalle y Dashboard. Además el detalle muestra el **umbral de reemplazo (70% SoH)** dibujado en el gráfico de degradación y una **proyección de vida útil por unidad** ("cruza el umbral en ~N meses" / "bajo el umbral — planificar evaluación"), etiquetada modelo v0 (demo) — la respuesta literal a la frase del encargado: *"puedes proyectar cuándo podría durar una batería exactamente"*.
 
 ### H2 — La entidad "sesión de carga" no existe
 Ni en `lib/data.ts` ni en ninguna de las 9 pantallas (al momento del diagnóstico). El pitch dice "la degradación se decide en el enchufe" y el encargado pidió exactamente "impacto de las cargas energéticas"… y la app no tiene dónde mostrar una carga. Falta la tabla y falta la pantalla: sesiones de El Sauce con kWh, SOC inicial→final, potencia, temperatura y **costo de degradación estimado por sesión**. Es la pantalla que se le vende a Alejandro.
@@ -56,6 +58,8 @@ E-01/E-02 son recorridos licitados fijos supervisados por el MTT. Reencuadrar el
 ### H6 — Identidad y escala de demo
 120 micros "MIC-1xx" con conductores ficticios vs **42 U9 con patentes reales y 25 conductoras de un gremio**. El backend debe ser agnóstico al tamaño (KPIs siempre derivados, nunca hardcodeados) y el **modo demo se conserva** tal cual (pitches, demos offline, fixtures). Además: el Eco-Score con nombre y apellido es **dato personal** (Ley 21.719) en contexto gremial → en el piloto va anonimizado o agregado por flota, propuesto de entrada.
 
+> **Mitigado (jul 2026):** Reportes muestra la nota "en el piloto real: datos anonimizados o agregados por flota (Ley 21.719)" bajo el eco-score por conductor, y el Header lleva un chip global **"Demo · datos simulados"** en las 10 pantallas — nadie puede confundir el mock con datos reales de la operación.
+
 ### H7 — Infraestructura pendiente conocida
 Auth real por roles, mapa real (el GPS de Tracktec se pinta con MapLibre/OSM, gratis), multi-tenant. La buena noticia: los ~19 componentes consumen todo desde `lib/data.ts`, así que el contrato TypeScript ya existe y el swap a API es limpio (ver paso 0 en §5).
 
@@ -64,10 +68,10 @@ Auth real por roles, mapa real (el GPS de Tracktec se pinta con MapLibre/OSM, gr
 ## 3. Mapa de conexión (las 3 superficies)
 
 ```
-LA MICRO (42× Foton U9)                LA BAHÍA (El Sauce, Copec Voltex)
-  │ CAN + GPS (hardware Tracktec)        │ OCPP 1.6
+LA MICRO (42× Foton U9)                LA BAHÍA (El Sauce — Eserco; obra Enel)
+  │ CAN + GPS (equipo a bordo)           │ OCPP 1.6
   ▼                                      ▼
-TRACKTEC Suite                         DHEMAX CMS
+TELEMETRÍA A BORDO (¿Tracktec?)        CMS DEL TERMINAL (¿Dhemax?)
 SOC, SoH BMS, km, eventos de           sesiones: kWh, curva de potencia,
 conducción, códigos de falla           SOC inicio/fin, horarios
   │ web services / exports               │ API / exports (por confirmar)
@@ -146,41 +150,44 @@ El SoH del BMS no se lee, se **estima**:
 ## 5. Plan por fases
 
 ### Fase 0 — El informe que abre puertas (2–4 semanas, sin integración)
-Con el visto bueno de Alejandro: **exports históricos** de Tracktec (SOC/SoH/km/eventos por bus) y Dhemax (sesiones de carga) para 5–10 micros. Hay ~20 meses de operación acumulada. Se construye: importador CSV (primer adaptador) + esquema canónico + estimador SoH v1 + **informe "Primera curva real de degradación de la flota E-01/E-02 y costo de degradación por sesión de carga"**. Ese papel convierte "un par de pruebas" en piloto formal. Cero riesgo y cero costo para Eserco; el informe queda para ellos.
+Con el visto bueno de Alejandro: **exports históricos** del sistema de telemetría (SOC/SoH/km/eventos por bus) y del sistema de gestión de carga (sesiones) — sean Tracktec/Dhemax u otros; las preguntas 3 y 6 lo confirman — para 5–10 micros. Hay ~20 meses de operación acumulada. Se construye: importador CSV (primer adaptador) + esquema canónico + estimador SoH v1 + **informe "Primera curva real de degradación de la flota E-01/E-02 y costo de degradación por sesión de carga"**. Ese papel convierte "un par de pruebas" en piloto formal. Cero riesgo y cero costo para Eserco; el informe queda para ellos.
 
 ### Fase 1 — Piloto vivo (1–2 meses después)
-Credenciales read-only (web services Tracktec + API/export Dhemax), polling con Vercel Cron, app en modo `live` con las 42 unidades, alertas reales, mapa real, pantalla nueva de **Cargas**, auth por roles para el jefe de flota y la A.T.
+Credenciales read-only (API/web services del sistema de telemetría + API/export del CMS del terminal, sean cuales sean), polling con Vercel Cron, app en modo `live` con las 42 unidades, alertas reales, mapa real, pantalla nueva de **Cargas**, auth por roles para el jefe de flota y la A.T.
 
 ### Fase 2 — Profundidad (según resultados)
-Eco-feedback al conductor en cabina (los eventos ya vienen de Tracktec), módulo taller en uso real (órdenes de trabajo = data propia), modelo v2 con más historia, y recién ahí evaluar el T-Box Foton vía Andes Motor.
+Eco-feedback al conductor en cabina (los eventos de conducción ya los captura la telemetría), módulo taller en uso real (órdenes de trabajo = data propia), modelo v2 con más historia, y recién ahí evaluar el T-Box Foton vía Andes Motor.
 
 ---
 
 ## 6. Preguntas para Alejandro Vásquez
 
+> **Versión lista para enviar** (sin notas internas de estrategia): `docs/preguntas-alejandro-vasquez.md`. Esta versión es la interna, con el porqué de cada pregunta.
+
 **Gobernanza (define todo lo demás):**
 1. ¿Quién es la contraparte dueña de los datos: Eserco, Liserco, o pasan por la DTPR/MTT? ¿Qué rol juega la Asistencia Técnica en ese acceso? ¿Necesitamos NDA o convenio (p. ej. vía INACAP)?
 2. ¿Cuántas micros y cuánta historia podríamos usar para la prueba? ¿Desde noviembre 2024?
 
-**Tracktec (el lado del vehículo):**
-3. ¿Qué módulos de la Suite contrató Eserco y qué variables entregan por bus: SOC, SoH, tensiones máx/mín de celda, temperaturas, códigos de falla, eventos de conducción (aceleración/frenado)? ¿Cada cuántos segundos?
-4. ¿Tienen habilitados los web services de la Suite o solo dashboard/exports? ¿Quién administra las credenciales?
-5. ¿La flota participa del estudio de degradación Tracktec–DICTUC? ¿Les han entregado resultados?
+**Telemetría del vehículo (¿Tracktec u otra? — el encargado no lo aseguró):**
+3. ¿Qué sistema de telemetría/gestión de flota usan los buses hoy? ¿Es Tracktec (que el encargado nombró como quien mide SOH en el mercado), el AVL exigido por el contrato, la plataforma del fabricante, u otro? ¿Qué variables entrega por bus: SOC, SoH, tensiones máx/mín de celda, temperaturas, códigos de falla, eventos de conducción (aceleración/frenado)? ¿Cada cuántos segundos?
+4. ¿Ese sistema tiene web services/API de solo lectura habilitados o solo dashboard/exports? ¿Quién administra las credenciales?
+5. Si es Tracktec: ¿la flota participa del estudio de degradación Tracktec–DICTUC? ¿Les han entregado resultados?
 
-**Dhemax / Copec Voltex (el lado del enchufe):**
-6. ¿El CMS de El Sauce es Dhemax? ¿Qué entrega por sesión: kWh, curva de potencia, SOC inicial/final, duración? ¿Por API o reporte?
-7. ¿Cómo se programa hoy la carga (ventanas nocturnas, Smart Charging activo, carga de oportunidad diurna)? ¿Quién decide qué bus carga cuándo?
+**La carga en El Sauce (el lado del enchufe):**
+6. ¿Quién gestiona hoy la carga del terminal y con qué plataforma: ¿Dhemax/Copec (como menciona el encargado), Enel X (que construyó la infraestructura eléctrica), o software del fabricante de los cargadores? ¿Qué entrega por sesión: kWh, curva de potencia, SOC inicial/final, duración, horario? ¿Se registra también la **temperatura del pack** al conectar (o esa solo la ve Tracktec)? ¿Por API o reporte?
+7. ¿Cómo se identifica **qué bus cargó en cada sesión** (RFID/idTag, bahía asignada por unidad, registro manual)? — Es la **llave del cruce** carga ↔ telemetría: sin identificación bus↔sesión confiable, el análisis del impacto de las cargas pierde su fundamento. Pregunta crítica.
+8. ¿Cómo se programa hoy la carga (ventanas nocturnas, Smart Charging activo, carga de oportunidad diurna)? ¿Quién decide qué bus carga cuándo?
 
 **Foton / Andes Motor / CATL:**
-8. ¿Condiciones de la garantía de batería (años/km y ventanas de operación de carga)? — el monitoreo sirve también para *demostrar compliance* de garantía, argumento directo para Eserco.
-9. ¿Andes Motor ofrece plataforma de monitoreo del fabricante o informes de SoH de posventa? ¿El T-Box GB/T 32960 está activo y reportando a alguien?
+9. ¿Condiciones de la garantía de batería (años/km y ventanas de operación de carga)? — el monitoreo sirve también para *demostrar compliance* de garantía, argumento directo para Eserco.
+10. ¿Andes Motor ofrece plataforma de monitoreo del fabricante o informes de SoH de posventa? ¿El T-Box GB/T 32960 está activo y reportando a alguien?
 
 **Taller y operación:**
-10. ¿Cómo registran hoy las mantenciones y fallas: sistema, planilla, WhatsApp? ¿Cuántos mecánicos y qué protocolo ante falla en ruta?
-11. ¿Qué pregunta les gustaría responder primero con datos? (ej.: ¿cuánto degrada una carga rápida en día caluroso vs nocturna?) ¿Qué KPI le importa al directorio: costo/km, disponibilidad, fecha de reemplazo de packs?
+11. ¿Cómo registran hoy las mantenciones y fallas: sistema, planilla, WhatsApp? ¿Cuántos mecánicos y qué protocolo ante falla en ruta?
+12. ¿Qué pregunta les gustaría responder primero con datos? (ej.: ¿cuánto degrada una carga rápida en día caluroso vs nocturna?) ¿Qué KPI le importa al directorio: costo/km, disponibilidad, fecha de reemplazo de packs?
 
 **Datos personales:**
-12. Proponer de entrada: Eco-Score anonimizado/agregado en el piloto (Ley 21.719 + contexto gremial). ¿Hay que conversarlo con el sindicato/asociación?
+13. Proponer de entrada: Eco-Score anonimizado/agregado en el piloto (Ley 21.719 + contexto gremial). ¿Hay que conversarlo con el sindicato/asociación?
 
 ---
 
@@ -188,7 +195,7 @@ Eco-feedback al conductor en cabina (los eventos ya vienen de Tracktec), módulo
 
 | Riesgo | Resguardo |
 |---|---|
-| Tracktec o Dhemax construyen el cruce antes | Velocidad del piloto local; posicionarse como capa neutral que los complementa (a ambos les sirve un cliente más contento) |
+| Tracktec, Dhemax o Enel X construyen el cruce antes | Velocidad del piloto local; posicionarse como capa neutral que los complementa (a todos les sirve un cliente más contento) |
 | Acceso a datos se traba en burocracia | Fase 0 pide solo exports históricos (esfuerzo mínimo para Eserco); convenio académico INACAP como paraguas |
 | Datos de conductores (gremio, Ley 21.719) | Anonimización/agregación propuesta de entrada, no cuando la objeten |
 | SoH BMS ruidoso invalida conclusiones | Estimador propio calibrado en cargas completas; ventanas largas; versionado de modelos |
@@ -210,3 +217,5 @@ Eco-feedback al conductor en cabina (los eventos ya vienen de Tracktec), módulo
 - [Dhemax — 1.200 eBuses y 60.000 cargas/mes](https://mobilityportal.es/dhemax-ebuses-soluciones-tecnologicas/)
 - [Optibus × Dhemax — integración con terceros](https://blog.optibus.com/es-es/nuevo-en-optibus-integracion-con-dhemax-smart-charging-para-mejorar-los-planes-de-carga-de-vehiculos-electricos)
 - [Mobility Portal — licitaciones 2025–2026](https://mobilityportal.lat/chile-buses-electricos-2025-2026/)
+- [Semanario Tiempo — Liserco firma con Enel la construcción de la infraestructura eléctrica](https://www.semanariotiempo.cl/liserco-adelanta-conversaciones-con-enel-kaufmann-y-andes-motor-para-implementar-buses-electricos-entre-la-serena-y-coquimbo/)
+- [Semanario Tiempo — Liserco invierte ~US$2M en el centro de carga de El Sauce (11 cargadores, 25 personas)](https://www.semanariotiempo.cl/liserco-destinara-us2-millones-para-centro-de-carga-de-buses-electricos/)
