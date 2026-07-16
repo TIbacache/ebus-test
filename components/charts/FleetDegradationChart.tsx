@@ -28,7 +28,7 @@ export function FleetDegradationChart({
   const ids = Object.keys(unidadLineColor);
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <LineChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: -18 }}>
+      <LineChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: 0 }}>
         <CartesianGrid stroke="rgba(148,163,184,0.2)" vertical={false} />
         <XAxis
           dataKey="dia"
