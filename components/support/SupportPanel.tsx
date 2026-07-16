@@ -381,7 +381,7 @@ function Guia({ onClose }: { onClose: () => void }) {
   return (
     <div className="flex flex-col gap-2">
       <p className="mb-1 text-xs text-text-muted">
-        Un recorrido por las 9 pantallas. Toca cualquiera para ir directo.
+        Un recorrido por las 10 pantallas. Toca cualquiera para ir directo.
       </p>
       {guideSteps.map((g) => {
         const Icon = g.icon;

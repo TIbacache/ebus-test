@@ -11,7 +11,7 @@
 |---|---|
 | **Qué es** | Plataforma de monitoreo en tiempo real de la salud de las baterías de micros eléctricas. |
 | **Qué resuelve** | El dato de salud de la batería existe. Pero rara vez llega a tiempo, y en forma accionable, a quien puede evitar la falla. |
-| **Estado** | Prototipo navegable y desplegado. 9 pantallas operativas. Datos simulados. Sin telemetría real *todavía*. |
+| **Estado** | Prototipo navegable y desplegado. 10 pantallas operativas. Datos simulados. Sin telemetría real *todavía*. |
 | **Qué pido** | Ni plata ni compromiso. Datos históricos de unas pocas unidades, veinte minutos, o un nombre. |
 
 ---
@@ -101,7 +101,7 @@ La apuesta no es reemplazar lo que ya existe, sino **conectarlo y hacerlo accion
 
 ## Dónde estamos, con total honestidad
 
-**Lo que existe hoy:** un prototipo navegable y desplegado, con las 9 pantallas del sistema operativas y recorribles — dashboard de flota, mapa, detalle de unidad, centro de alertas, panel del mecánico, módulo del conductor, reportes, configuración. Se puede usar. Se entiende en cinco minutos.
+**Lo que existe hoy:** un prototipo navegable y desplegado, con las 10 pantallas del sistema operativas y recorribles — dashboard de flota, mapa, detalle de unidad, **sesiones de carga con estrés de degradación por sesión (modelo v0)**, centro de alertas, panel del mecánico, módulo del conductor, reportes, configuración. Se puede usar. Se entiende en cinco minutos.
 
 **Lo que no existe todavía:** telemetría real. Los datos del prototipo son simulados y sirven para demostrar el concepto, no para describir la flota de La Serena.
 

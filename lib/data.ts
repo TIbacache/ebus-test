@@ -19,6 +19,9 @@ import type {
   IntervencionMecanico,
   PuntoSoH,
   PuntoTendenciaFlota,
+  ResumenCargasFlota,
+  ResumenCargaUnidad,
+  SesionCarga,
   SolicitudMecanico,
   Unidad,
   UsuarioSistema,
@@ -38,9 +41,13 @@ export type {
   IntervencionMecanico,
   PuntoSoH,
   PuntoTendenciaFlota,
+  ResumenCargasFlota,
+  ResumenCargaUnidad,
+  SesionCarga,
   SolicitudMecanico,
   Unidad,
   UsuarioSistema,
+  VentanaCarga,
 } from "./types";
 
 export const fleetSummary: FleetSummary = {
@@ -353,3 +360,39 @@ export const usuariosSistema: UsuarioSistema[] = [
   { nombre: "Pedro Flores", rol: "Conductor", estado: "Activo" },
   { nombre: "Carla Núñez", rol: "Operador", estado: "Inactivo" },
 ];
+
+// ---- Cargas (Electroterminal El Sauce) --------------------------------------
+// Narrativa demo: pack ~229 kWh; ventana óptima 23:00–06:00 (Configuración).
+// MIC-104 castiga la batería (cargas rápidas de mediodía, celda caliente,
+// ciclos profundos) — consistente con su SoH 41 y sus 1.240 ciclos.
+
+/** Sesiones de carga recientes (representativas; el resto se resume). */
+export const sesionesCarga: SesionCarga[] = [
+  { id: "SES-1042", unidad: "MIC-104", fecha: "Hoy", inicio: "13:05", fin: "13:52", duracionMin: 47, socInicial: 22, socFinal: 71, kwh: 112, potenciaMaxKw: 150, tempInicio: 39, cargador: "ES-04", ventana: "fuera", estres: 86 },
+  { id: "SES-1038", unidad: "MIC-101", fecha: "Anoche", inicio: "23:30", fin: "02:58", duracionMin: 208, socInicial: 26, socFinal: 90, kwh: 147, potenciaMaxKw: 82, tempInicio: 24, cargador: "ES-02", ventana: "optima", estres: 22 },
+  { id: "SES-1037", unidad: "MIC-102", fecha: "Anoche", inicio: "23:12", fin: "03:05", duracionMin: 233, socInicial: 20, socFinal: 88, kwh: 156, potenciaMaxKw: 88, tempInicio: 27, cargador: "ES-06", ventana: "optima", estres: 34 },
+  { id: "SES-1036", unidad: "MIC-103", fecha: "Anoche", inicio: "23:58", fin: "03:40", duracionMin: 222, socInicial: 24, socFinal: 92, kwh: 156, potenciaMaxKw: 96, tempInicio: 29, cargador: "ES-09", ventana: "optima", estres: 47 },
+  { id: "SES-1035", unidad: "MIC-104", fecha: "Anoche", inicio: "22:10", fin: "02:54", duracionMin: 284, socInicial: 8, socFinal: 100, kwh: 211, potenciaMaxKw: 148, tempInicio: 33, cargador: "ES-04", ventana: "fuera", estres: 74 },
+  { id: "SES-1034", unidad: "MIC-105", fecha: "Anoche", inicio: "00:15", fin: "03:32", duracionMin: 197, socInicial: 29, socFinal: 91, kwh: 142, potenciaMaxKw: 79, tempInicio: 23, cargador: "ES-11", ventana: "optima", estres: 21 },
+  { id: "SES-1029", unidad: "MIC-103", fecha: "Ayer", inicio: "14:20", fin: "15:22", duracionMin: 62, socInicial: 31, socFinal: 68, kwh: 85, potenciaMaxKw: 141, tempInicio: 36, cargador: "ES-01", ventana: "fuera", estres: 63 },
+  { id: "SES-1026", unidad: "MIC-101", fecha: "13 jul", inicio: "23:47", fin: "03:02", duracionMin: 195, socInicial: 30, socFinal: 89, kwh: 135, potenciaMaxKw: 80, tempInicio: 22, cargador: "ES-05", ventana: "optima", estres: 24 },
+  { id: "SES-1024", unidad: "MIC-104", fecha: "12 jul", inicio: "12:40", fin: "13:34", duracionMin: 54, socInicial: 15, socFinal: 64, kwh: 112, potenciaMaxKw: 149, tempInicio: 38, cargador: "ES-03", ventana: "fuera", estres: 81 },
+  { id: "SES-1021", unidad: "MIC-105", fecha: "12 jul", inicio: "23:20", fin: "02:41", duracionMin: 201, socInicial: 27, socFinal: 90, kwh: 144, potenciaMaxKw: 81, tempInicio: 24, cargador: "ES-08", ventana: "optima", estres: 23 },
+];
+
+/** Resumen de carga por unidad — últimos 30 días. */
+export const resumenCargaPorUnidad: ResumenCargaUnidad[] = [
+  { unidad: "MIC-101", sesiones30d: 29, kwh30d: 4260, pctVentanaOptima: 97, estresPromedio: 23 },
+  { unidad: "MIC-102", sesiones30d: 30, kwh30d: 4685, pctVentanaOptima: 93, estresPromedio: 31 },
+  { unidad: "MIC-103", sesiones30d: 31, kwh30d: 4850, pctVentanaOptima: 74, estresPromedio: 52 },
+  { unidad: "MIC-104", sesiones30d: 34, kwh30d: 5610, pctVentanaOptima: 41, estresPromedio: 79 },
+  { unidad: "MIC-105", sesiones30d: 28, kwh30d: 4095, pctVentanaOptima: 96, estresPromedio: 22 },
+];
+
+/** KPIs de carga de toda la flota (anoche). */
+export const resumenCargasFlota: ResumenCargasFlota = {
+  sesionesAnoche: 96,
+  kwhAnoche: 14352,
+  pctVentanaOptima: 87,
+  estresPromedio: 32,
+};

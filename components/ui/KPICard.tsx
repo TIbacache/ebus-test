@@ -4,12 +4,13 @@ import { useEffect, useState, type ReactNode } from "react";
 import { animate } from "motion/react";
 import { ArrowUp, ArrowDown } from "lucide-react";
 
-type Accent = "primary" | "critical" | "healthy" | "muted";
+type Accent = "primary" | "critical" | "healthy" | "warning" | "muted";
 
 const accentMap: Record<Accent, { text: string; soft: string }> = {
   primary: { text: "text-primary", soft: "bg-primary/10" },
   critical: { text: "text-critical", soft: "bg-critical/10" },
   healthy: { text: "text-healthy", soft: "bg-healthy/10" },
+  warning: { text: "text-warning", soft: "bg-warning/10" },
   muted: { text: "text-text-muted", soft: "bg-surface-offset" },
 };
 
@@ -77,7 +78,7 @@ export function KPICard({
             pulse ? "text-critical" : "text-text"
           }`}
         >
-          {display}
+          {display.toLocaleString("es-CL")}
           {suffix}
         </span>
         {trend && (

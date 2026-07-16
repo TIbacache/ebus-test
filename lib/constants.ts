@@ -64,6 +64,7 @@ export function estadoDesdeBateria(pct: number): Estado {
 export type NavIcon =
   | "resumen"
   | "flota"
+  | "cargas"
   | "alertas"
   | "mecanico"
   | "conductor"
@@ -81,6 +82,7 @@ export interface NavItem {
 export const navItems: NavItem[] = [
   { href: "/dashboard", label: "Resumen", icon: "resumen" },
   { href: "/flota", label: "Flota", icon: "flota" },
+  { href: "/cargas", label: "Cargas", icon: "cargas" },
   { href: "/alertas", label: "Alertas", icon: "alertas", badge: 3 },
   { href: "/mecanico", label: "Mecánico", icon: "mecanico" },
   { href: "/conductor", label: "Conductor", icon: "conductor" },

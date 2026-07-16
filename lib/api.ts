@@ -27,6 +27,9 @@ import type {
   IntervencionMecanico,
   PuntoSoH,
   PuntoTendenciaFlota,
+  ResumenCargasFlota,
+  ResumenCargaUnidad,
+  SesionCarga,
   SolicitudMecanico,
   Unidad,
   UsuarioSistema,
@@ -63,6 +66,10 @@ export interface DataSource {
   getIncidenciasPorUnidad(): Promise<IncidenciasUnidad[]>;
   getFallasEvitadas(): Promise<number>;
   getUsuariosSistema(): Promise<UsuarioSistema[]>;
+  /** Sesiones de carga recientes (H2). En live: CMS del electroterminal (OCPP) vía adaptador. */
+  getSesionesCarga(): Promise<SesionCarga[]>;
+  getResumenCargaPorUnidad(): Promise<ResumenCargaUnidad[]>;
+  getResumenCargasFlota(): Promise<ResumenCargasFlota>;
 }
 
 const demoSource: DataSource = {
@@ -90,6 +97,9 @@ const demoSource: DataSource = {
   getIncidenciasPorUnidad: async () => demo.incidenciasPorUnidad,
   getFallasEvitadas: async () => demo.fallasEvitadas,
   getUsuariosSistema: async () => demo.usuariosSistema,
+  getSesionesCarga: async () => demo.sesionesCarga,
+  getResumenCargaPorUnidad: async () => demo.resumenCargaPorUnidad,
+  getResumenCargasFlota: async () => demo.resumenCargasFlota,
 };
 
 function noImplementado(metodo: string): never {
@@ -116,6 +126,9 @@ const liveSource: DataSource = {
   getIncidenciasPorUnidad: async () => noImplementado("getIncidenciasPorUnidad"),
   getFallasEvitadas: async () => noImplementado("getFallasEvitadas"),
   getUsuariosSistema: async () => noImplementado("getUsuariosSistema"),
+  getSesionesCarga: async () => noImplementado("getSesionesCarga"),
+  getResumenCargaPorUnidad: async () => noImplementado("getResumenCargaPorUnidad"),
+  getResumenCargasFlota: async () => noImplementado("getResumenCargasFlota"),
 };
 
 /** Fuente activa según el flag. Las pantallas deben usar esto (o los atajos). */
@@ -148,3 +161,8 @@ export const getIncidenciasPorUnidad = () =>
   getDataSource().getIncidenciasPorUnidad();
 export const getFallasEvitadas = () => getDataSource().getFallasEvitadas();
 export const getUsuariosSistema = () => getDataSource().getUsuariosSistema();
+export const getSesionesCarga = () => getDataSource().getSesionesCarga();
+export const getResumenCargaPorUnidad = () =>
+  getDataSource().getResumenCargaPorUnidad();
+export const getResumenCargasFlota = () =>
+  getDataSource().getResumenCargasFlota();
