@@ -101,7 +101,7 @@ La apuesta no es reemplazar lo que ya existe, sino **conectarlo y hacerlo accion
 
 ## Dónde estamos, con total honestidad
 
-**Lo que existe hoy:** un prototipo navegable y desplegado, con las 10 pantallas del sistema operativas y recorribles — dashboard de flota, mapa, detalle de unidad, **sesiones de carga con estrés de degradación por sesión (modelo v0)**, centro de alertas, panel del mecánico, módulo del conductor, reportes, configuración. Se puede usar. Se entiende en cinco minutos.
+**Lo que existe hoy:** un prototipo navegable y desplegado, con las 10 pantallas del sistema operativas y recorribles — dashboard de flota, mapa, detalle de unidad, **sesiones de carga con estrés de degradación por sesión (modelo v0)**, centro de alertas, panel del mecánico, módulo del conductor, reportes, configuración. El prototipo distingue explícitamente la **carga del día (SOC)** de la **salud de largo plazo (SoH)** de cada batería, y **proyecta cuándo cada pack cruzará el umbral de reemplazo (70% SoH)** — con datos simulados y etiquetado como tal, porque esa proyección es exactamente lo que queremos construir con datos reales. Se puede usar. Se entiende en cinco minutos.
 
 **Lo que no existe todavía:** telemetría real. Los datos del prototipo son simulados y sirven para demostrar el concepto, no para describir la flota de La Serena.
 

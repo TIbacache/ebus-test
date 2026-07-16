@@ -39,6 +39,8 @@ Auditoría del prototipo (spec `prompt-maestro-ebus-v2.md` + código) contra el 
 ### H1 — SOC y SoH están fundidos en un solo campo (el hallazgo más importante)
 `Unidad.bateria: 15%` dispara `estado: critical` y todo el relato de salud. Pero son cosas distintas: un U9 con **15% de carga (SOC)** al final del día es una micro normal llegando a El Sauce; un U9 con **85% de salud (SoH)** al año de uso es una emergencia silenciosa. El semáforo actual es de SOC (operación del día); la tesis del proyecto es de SoH (degradación). El modelo de datos real necesita **ambos campos** y el dashboard necesita **las dos vistas** (operación / salud).
 
+> **Resuelto (jul 2026):** la UI ahora separa **"Salud (SoH)"** de **"Carga actual (SOC)"** con semáforo de salud propio (<55 crítico · <70 zona de reemplazo · <85 normal · ≥85 sano) en Flota, Detalle y Dashboard. Además el detalle muestra el **umbral de reemplazo (70% SoH)** dibujado en el gráfico de degradación y una **proyección de vida útil por unidad** ("cruza el umbral en ~N meses" / "bajo el umbral — planificar evaluación"), etiquetada modelo v0 (demo) — la respuesta literal a la frase del encargado: *"puedes proyectar cuándo podría durar una batería exactamente"*.
+
 ### H2 — La entidad "sesión de carga" no existe
 Ni en `lib/data.ts` ni en ninguna de las 9 pantallas (al momento del diagnóstico). El pitch dice "la degradación se decide en el enchufe" y el encargado pidió exactamente "impacto de las cargas energéticas"… y la app no tiene dónde mostrar una carga. Falta la tabla y falta la pantalla: sesiones de El Sauce con kWh, SOC inicial→final, potencia, temperatura y **costo de degradación estimado por sesión**. Es la pantalla que se le vende a Alejandro.
 
@@ -55,6 +57,8 @@ E-01/E-02 son recorridos licitados fijos supervisados por el MTT. Reencuadrar el
 
 ### H6 — Identidad y escala de demo
 120 micros "MIC-1xx" con conductores ficticios vs **42 U9 con patentes reales y 25 conductoras de un gremio**. El backend debe ser agnóstico al tamaño (KPIs siempre derivados, nunca hardcodeados) y el **modo demo se conserva** tal cual (pitches, demos offline, fixtures). Además: el Eco-Score con nombre y apellido es **dato personal** (Ley 21.719) en contexto gremial → en el piloto va anonimizado o agregado por flota, propuesto de entrada.
+
+> **Mitigado (jul 2026):** Reportes muestra la nota "en el piloto real: datos anonimizados o agregados por flota (Ley 21.719)" bajo el eco-score por conductor, y el Header lleva un chip global **"Demo · datos simulados"** en las 10 pantallas — nadie puede confundir el mock con datos reales de la operación.
 
 ### H7 — Infraestructura pendiente conocida
 Auth real por roles, mapa real (el GPS de Tracktec se pinta con MapLibre/OSM, gratis), multi-tenant. La buena noticia: los ~19 componentes consumen todo desde `lib/data.ts`, así que el contrato TypeScript ya existe y el swap a API es limpio (ver paso 0 en §5).
