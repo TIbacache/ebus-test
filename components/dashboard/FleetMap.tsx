@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { Bus } from "lucide-react";
-import { unidades } from "@/lib/data";
 import { estadoConfig } from "@/lib/constants";
-import type { Estado } from "@/lib/data";
+import type { Estado, Unidad } from "@/lib/types";
 
 const posiciones: Record<string, { top: string; left: string }> = {
   "MIC-101": { top: "20%", left: "16%" },
@@ -58,13 +57,19 @@ function Marker({
   );
 }
 
-export function FleetMap() {
+export function FleetMap({
+  unidades,
+  enRecorrido,
+}: {
+  unidades: Unidad[];
+  enRecorrido: number;
+}) {
   return (
     <div className="card overflow-hidden">
       <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 border-b border-line px-4 py-3">
         <div>
           <h3 className="text-sm font-semibold">Mapa en tiempo real</h3>
-          <p className="text-xs text-text-faint">98 micros en recorrido — La Serena</p>
+          <p className="text-xs text-text-faint">{enRecorrido} micros en recorrido — La Serena</p>
         </div>
         <div className="flex items-center gap-3 text-[11px] text-text-muted">
           <span className="flex items-center gap-1.5">

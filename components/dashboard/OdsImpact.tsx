@@ -7,7 +7,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { ods } from "@/lib/constants";
-import { fallasEvitadas } from "@/lib/data";
 
 const odsIcon: Record<number, LucideIcon> = {
   3: HeartPulse,
@@ -16,7 +15,7 @@ const odsIcon: Record<number, LucideIcon> = {
 };
 
 /** Banda de impacto: conecta los ODS 3/7/13 con funcionalidades concretas. */
-export function OdsImpact() {
+export function OdsImpact({ fallasEvitadas }: { fallasEvitadas: number }) {
   return (
     <section className="card p-4 md:p-5">
       <div className="mb-4 flex items-center justify-between gap-3">

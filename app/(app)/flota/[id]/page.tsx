@@ -10,12 +10,8 @@ import {
   Gauge,
   TriangleAlert,
 } from "lucide-react";
-import {
-  getUnidad,
-  degradacion30d,
-  alertasPreviasMic104,
-  type Estado,
-} from "@/lib/data";
+import { getAlertasPrevias, getDegradacion30d, getUnidad } from "@/lib/api";
+import type { Estado } from "@/lib/types";
 import { estadoConfig } from "@/lib/constants";
 import { AlertBadge } from "@/components/ui/AlertBadge";
 import { StatusDot } from "@/components/ui/StatusDot";
@@ -63,11 +59,14 @@ export default async function DetalleUnidadPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const u = getUnidad(id);
+  const u = await getUnidad(id);
   if (!u) notFound();
 
+  const [serie, alertasPrevias] = await Promise.all([
+    getDegradacion30d(u.id),
+    getAlertasPrevias(u.id),
+  ]);
   const c = estadoConfig[u.estado];
-  const serie = degradacion30d[u.id] ?? [];
   const esCritico = u.estado === "critical";
 
   return (
@@ -223,7 +222,7 @@ export default async function DetalleUnidadPage({
           </div>
           {esCritico ? (
             <ul className="divide-y divide-line">
-              {alertasPreviasMic104.map((a, i) => {
+              {alertasPrevias.map((a, i) => {
                 const ec = estadoConfig[a.severidad];
                 return (
                   <li

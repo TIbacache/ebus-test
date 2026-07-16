@@ -7,10 +7,23 @@ import { FleetMap } from "@/components/dashboard/FleetMap";
 import { AlertFeed } from "@/components/dashboard/AlertFeed";
 import { BatteryBar } from "@/components/ui/BatteryBar";
 import { StatusDot } from "@/components/ui/StatusDot";
-import { fleetSummary, unidades } from "@/lib/data";
+import {
+  getAlertasActivas,
+  getFallasEvitadas,
+  getFleetSummary,
+  getUnidades,
+} from "@/lib/api";
 import { estadoConfig } from "@/lib/constants";
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const [fleetSummary, unidades, alertasActivas, fallasEvitadas] =
+    await Promise.all([
+      getFleetSummary(),
+      getUnidades(),
+      getAlertasActivas(),
+      getFallasEvitadas(),
+    ]);
+
   return (
     <div className="flex flex-col gap-5">
       <div>
@@ -21,7 +34,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Metáfora "El Corazón del Bus" — pulso de la flota */}
-      <FleetPulse />
+      <FleetPulse fleetSummary={fleetSummary} unidades={unidades} />
 
       {/* KPIs */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
@@ -61,7 +74,7 @@ export default function DashboardPage() {
       {/* Mapa + lista + alertas */}
       <div className="grid gap-5 lg:grid-cols-3">
         <div className="flex flex-col gap-5 lg:col-span-2">
-          <FleetMap />
+          <FleetMap unidades={unidades} enRecorrido={fleetSummary.enRecorrido} />
 
           <div className="card overflow-hidden">
             <div className="flex items-center justify-between border-b border-line px-4 py-3">
@@ -108,17 +121,17 @@ export default function DashboardPage() {
                 );
               })}
               <li className="px-4 py-2.5 text-center text-xs text-text-faint">
-                y 115 unidades más en operación
+                y {fleetSummary.total - unidades.length} unidades más en operación
               </li>
             </ul>
           </div>
         </div>
 
-        <AlertFeed />
+        <AlertFeed alertasActivas={alertasActivas} />
       </div>
 
       {/* Impacto ODS 3/7/13 conectado a funcionalidades */}
-      <OdsImpact />
+      <OdsImpact fallasEvitadas={fallasEvitadas} />
     </div>
   );
 }
