@@ -1,32 +1,15 @@
 // ============================================================
-// E-Bus Control — Mock data centralizada (sin backend).
+// E-Bus Control — Mock data centralizada (modo demo).
 // Datos canónicos EXACTOS del prompt. Series deterministas
 // (sin Math.random) para evitar mismatch de hidratación SSR/CSR.
+// Tipos del dominio en lib/types.ts; acceso vía lib/api.ts.
 // ============================================================
 
-export type Estado = "healthy" | "normal" | "warning" | "critical" | "offline";
+import type { Alerta, Estado, FleetSummary, PuntoSoH, Unidad } from "./types";
 
-export interface Unidad {
-  id: string;
-  bateria: number;
-  estado: Estado;
-  conductor: string;
-  ruta: string;
-  ultimaActualizacion: string;
-  // Telemetría / caso activo (MIC-104)
-  ubicacion?: string;
-  tipoFalla?: string;
-  celda?: string;
-  mecanico?: string;
-  eta?: number;
-  voltaje?: number; // V
-  temperatura?: number; // °C celda
-  ciclos?: number; // ciclos de carga
-  velocidad?: number; // km/h
-  ecoScore?: number; // 0-100
-}
+export type { Alerta, Estado, FleetSummary, PuntoSoH, Unidad } from "./types";
 
-export const fleetSummary = {
+export const fleetSummary: FleetSummary = {
   total: 120,
   enRecorrido: 98,
   conAlerta: 3,
@@ -37,6 +20,7 @@ export const unidades: Unidad[] = [
   {
     id: "MIC-101",
     bateria: 85,
+    soh: 89,
     estado: "healthy",
     conductor: "Carlos Muñoz",
     ruta: "Ruta 1",
@@ -50,6 +34,7 @@ export const unidades: Unidad[] = [
   {
     id: "MIC-102",
     bateria: 62,
+    soh: 80,
     estado: "normal",
     conductor: "Jorge Pérez",
     ruta: "Ruta 3",
@@ -63,6 +48,7 @@ export const unidades: Unidad[] = [
   {
     id: "MIC-103",
     bateria: 35,
+    soh: 66,
     estado: "warning",
     conductor: "Luis Torres",
     ruta: "Ruta 7",
@@ -76,6 +62,7 @@ export const unidades: Unidad[] = [
   {
     id: "MIC-104",
     bateria: 15,
+    soh: 41,
     estado: "critical",
     conductor: "Pedro Flores",
     ruta: "Ruta 5",
@@ -94,6 +81,7 @@ export const unidades: Unidad[] = [
   {
     id: "MIC-105",
     bateria: 78,
+    soh: 86,
     estado: "healthy",
     conductor: "Mario Díaz",
     ruta: "Ruta 2",
@@ -126,7 +114,7 @@ export function serieSoH(
   fin: number,
   dias = 30,
   amp = 1.2,
-): { dia: number; soh: number }[] {
+): PuntoSoH[] {
   return Array.from({ length: dias }, (_, i) => {
     const t = i / (dias - 1);
     const base = inicio + (fin - inicio) * t;
@@ -135,7 +123,7 @@ export function serieSoH(
 }
 
 /** Degradación SoH 30 días por unidad (MIC-104 cae en picada). */
-export const degradacion30d: Record<string, { dia: number; soh: number }[]> = {
+export const degradacion30d: Record<string, PuntoSoH[]> = {
   "MIC-101": serieSoH(92, 89),
   "MIC-102": serieSoH(85, 80),
   "MIC-103": serieSoH(78, 66, 30, 1.6),
@@ -150,19 +138,6 @@ export const tendenciaSaludFlota = Array.from({ length: 12 }, (_, i) => ({
 }));
 
 // ---- Alertas --------------------------------------------------------------
-
-export interface Alerta {
-  id: string;
-  unidad: string;
-  conductor: string;
-  estadoUnidad: Estado;
-  bateria: number;
-  titulo: string;
-  ubicacion: string;
-  tipoFalla: string;
-  detectada: string; // hora
-  estadoAlerta: "Atención Requerida" | "En atención" | "Notificado";
-}
 
 export const alertasActivas: Alerta[] = [
   {
