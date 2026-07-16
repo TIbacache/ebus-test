@@ -19,9 +19,9 @@
 4. ¿Se puede exportar el histórico (CSV/Excel) o acceder por API/web services de solo lectura? ¿Quién administra esas credenciales?
 5. ¿La flota participa del estudio de degradación de baterías de Tracktec con la Universidad Católica (DICTUC)? ¿Les han compartido resultados?
 
-## Sobre la carga (El Sauce · Copec Voltex · Dhemax)
+## Sobre la carga (electroterminal El Sauce)
 
-6. ¿Qué queda registrado por sesión de carga: kWh entregados, curva de potencia, SOC inicial y final, duración, horario? ¿Se registra también la temperatura del pack al conectar?
+6. ¿Quién gestiona hoy la carga del terminal y con qué plataforma (Dhemax/Copec, Enel X, software propio de los cargadores)? ¿Qué queda registrado por sesión de carga: kWh entregados, curva de potencia, SOC inicial y final, duración, horario? ¿Se registra también la temperatura del pack al conectar?
 7. ¿Cómo se identifica qué bus cargó en cada sesión (tarjeta RFID, bahía asignada por unidad, registro manual)? — Esta es la llave para cruzar los datos de carga con los de telemetría.
 8. ¿Cómo se programa hoy la carga (ventanas nocturnas, carga inteligente, cargas de oportunidad durante el día)? ¿Quién decide qué bus carga cuándo?
 
