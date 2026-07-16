@@ -7,6 +7,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
+  ReferenceLine,
   ResponsiveContainer,
 } from "recharts";
 
@@ -21,9 +22,12 @@ const tooltipStyle = {
 export function DegradationChart({
   data,
   color = "#FF4444",
+  umbral,
 }: {
   data: { dia: number; soh: number }[];
   color?: string;
+  /** Umbral de reemplazo (EOL) — dibuja una línea de referencia punteada. */
+  umbral?: number;
 }) {
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -52,6 +56,20 @@ export function DegradationChart({
           labelFormatter={(d) => `Día ${d}`}
           formatter={(v) => [`${v}%`, "Salud"]}
         />
+        {umbral != null && (
+          <ReferenceLine
+            y={umbral}
+            stroke="#FF8C00"
+            strokeDasharray="6 4"
+            strokeWidth={1.5}
+            label={{
+              value: `Umbral de reemplazo (${umbral}%)`,
+              fill: "#FF8C00",
+              fontSize: 10,
+              position: "insideBottomLeft",
+            }}
+          />
+        )}
         <Line
           type="monotone"
           dataKey="soh"

@@ -61,6 +61,20 @@ export function estadoDesdeBateria(pct: number): Estado {
   return "healthy";
 }
 
+/** Umbral de fin de vida útil de un pack de tracción (EOL industria: 70–80%). */
+export const umbralEolSoH = 70;
+
+/**
+ * Semáforo de SALUD (SoH) — deliberadamente distinto del semáforo de carga:
+ * 15% de carga al final del turno es normal; 66% de salud es zona de reemplazo.
+ */
+export function estadoDesdeSoH(soh: number): Estado {
+  if (soh < 55) return "critical";
+  if (soh < umbralEolSoH) return "warning";
+  if (soh < 85) return "normal";
+  return "healthy";
+}
+
 export type NavIcon =
   | "resumen"
   | "flota"
@@ -90,13 +104,13 @@ export const navItems: NavItem[] = [
   { href: "/configuracion", label: "Configuración", icon: "config" },
 ];
 
-/** Bottom navigation (mobile): 5 ítems principales. */
+/** Bottom navigation (mobile): 5 ítems principales (Cargas entra; Conductor queda vía Soporte/links). */
 export const mobileNavIcons: NavIcon[] = [
   "resumen",
   "flota",
+  "cargas",
   "alertas",
   "mecanico",
-  "conductor",
 ];
 
 /** Roles de acceso (login). */

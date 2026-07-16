@@ -2,8 +2,9 @@
 // E-Bus Control — Capa de acceso a datos (repositorio).
 // Las pantallas consumen estas funciones, nunca la fuente
 // directa. Modo "demo" (default): mock de lib/data.ts. Modo
-// "live": backend real de Fase 1 (Supabase + adaptadores
-// Tracktec/Dhemax — ver docs/analisis-integracion-la-serena.md §4).
+// "live": backend real de Fase 1 (Supabase + adaptadores del
+// sistema de telemetría y del CMS del terminal — proveedores por
+// confirmar; ver docs/analisis-integracion-la-serena.md §4).
 //
 // Flag: NEXT_PUBLIC_DATA_SOURCE = "demo" | "live".
 //
