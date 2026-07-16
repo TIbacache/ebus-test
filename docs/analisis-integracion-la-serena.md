@@ -2,7 +2,7 @@
 
 > Investigación y diseño (julio 2026) para conectar el prototipo a las micros reales, los talleres y las bahías de carga de La Serena–Coquimbo. Complementa `resumen-ejecutivo-ebus-control.md` (documento para reenviar) y `pitch-3min-ebus.md` (guion del video).
 >
-> **Origen:** respuesta del encargado de las micros eléctricas — "miden el SOH (Tracktec, Copec a través de Dhemax), pero solo como dato; ninguno alcanza cálculos exactos del impacto de las cargas o la degradación por operación" — y su oferta de hacer pruebas con los buses de La Serena, sujeta a Alejandro Vásquez (jefe de A.T.).
+> **Origen:** respuesta del encargado de las micros eléctricas — en el mercado "hay que miden el SOH" (nombró a Tracktec y a "Copec a través de Dhemax"), pero "solo como dato": ninguno alcanza cálculos exactos del impacto de las cargas o la degradación por operación. **Ojo: nombró quiénes miden SOH en el mercado — NUNCA aseguró cuál usa su flota** (lo resuelven las preguntas 3 y 6). Más su oferta de hacer pruebas con los buses de La Serena, sujeta a Alejandro Vásquez (jefe de A.T.).
 
 ---
 
@@ -13,8 +13,8 @@
 | **Flota** | 42 buses **Foton U9**: motor 245 kW, batería **CATL LFP de 229 kWh**, ~280 km de autonomía. Servicios **E-01** (El Sauce–El Romero) y **E-02** (La Pampilla–Av. Viña del Mar, extendido a El Sauce en abril 2025). ~26 km por trayecto, ~8.000 pasajeros/día, 326 salidas en día laboral. Operando desde el **29 de noviembre de 2024** |
 | **Operador** | **Eserco** (Empresa de Electromovilidad La Serena Coquimbo), creada por **Liserco** (asociación gremial de dueños de microbuses). 25 conductoras mujeres en la operación |
 | **Bahías de carga** | Electroterminal **El Sauce** (Coquimbo): 11 cargadores duales que cargan hasta **22 buses en paralelo**, potencia mínima 1,35 MW. **Propiedad y operación de Liserco/Eserco** (inversión propia ~US$2M en terrenos de Liserco, 25 personas); la **infraestructura eléctrica la construyó Enel** ("con ellos firmé" — presidente de Liserco en prensa) y el empalme lo autorizó **CGE**. **Quién gestiona la carga (CMS) está por confirmar**: el encargado menciona "Copec a través de Dhemax", consistente con un rol de software/medición, no de propiedad |
-| **Telemetría del bus** | **Tracktec** (Suite con módulos de monitoreo de flota, telemetría mecánica, gestión de fallas y transporte público; +350 eBuses servidos en Chile). Integración vía web services — las specs no son públicas, se solicitan por su mesa de soporte |
-| **Gestión de carga** | **Dhemax** (socio tecnológico de Copec Voltex): CMS bajo **OCPP 1.6**, gestiona +1.200 eBuses/día y 60.000 cargas/mes en Latam y Europa. Ya se integran con terceros (ej. Optibus para planes de carga) — abrir datos a integradores es parte de su modelo. **Ojo:** su rol específico en El Sauce no está confirmado por prensa, solo por la mención del encargado (preguntas 6–7) |
+| **Telemetría del bus** | **Qué plataforma usa Eserco está POR CONFIRMAR** (pregunta 3): los U9 traen GPS/telemetría a bordo y el contrato exige gestión de flota, pero el proveedor no está publicado. El encargado nombró a **Tracktec** como quien mide SOH *en el mercado* (Suite con módulos de monitoreo, telemetría mecánica y gestión de fallas; +350 eBuses en Chile; web services no públicos) — candidato natural, **no confirmado como el de la flota** |
+| **Gestión de carga** | **Dhemax** (socio tecnológico de Copec Voltex): CMS bajo **OCPP 1.6**, gestiona +1.200 eBuses/día y 60.000 cargas/mes en Latam y Europa. Ya se integran con terceros (ej. Optibus para planes de carga) — abrir datos a integradores es parte de su modelo. **Ojo:** el encargado los nombró como quienes miden SOH *en el mercado* ("Copec a través de Dhemax") — **sin asegurar que la flota los use**; su rol en El Sauce es hipótesis (preguntas 6–7) |
 | **El fabricante** | Los buses chinos nacen con T-Box bajo la norma **GB/T 32960** (reporta cada pocos segundos: SOC, tensión/corriente total, tensiones máx/mín de celda con su posición, temperaturas por sonda, alarmas). En unidades exportadas ese flujo suele apuntar al fabricante/distribuidor (**Andes Motor**) o estar inactivo — fuente potencial que nadie está usando; hay que preguntar |
 | **Contexto de crecimiento** | Licitaciones 2025–2026: ~895 buses eléctricos regionales nuevos, con 14 electroterminales adjudicados a Copec Voltex (~70% de los puntos nuevos). El diseño multi-flota no es teórico: el mercado regional se está multiplicando ahora |
 
@@ -24,7 +24,7 @@ Tracktec mantiene desde 2023 un **estudio de degradación de baterías con DICTU
 
 La ventaja de E-Bus Control **no** es tener el dato (nunca lo tendremos mejor que Tracktec):
 
-1. **El cruce ruta × enchufe.** Tracktec ve la operación (no ve el detalle de la carga); el CMS del terminal —Dhemax, según la operación— ve la carga (no ve la ruta). Cada uno tiene la mitad de la vida de la batería. El cálculo que falta —cuánto degrada cada sesión de carga y cada jornada de operación— sale de cruzar ambos, y ninguno puede hacerlo solo.
+1. **El cruce ruta × enchufe.** La telemetría del vehículo (sea Tracktec u otra) ve la operación, no el detalle de la carga; el CMS del terminal (¿Dhemax?) ve la carga, no la ruta. Cada uno tiene la mitad de la vida de la batería. El cálculo que falta —cuánto degrada cada sesión de carga y cada jornada de operación— sale de cruzar ambos, y ninguno puede hacerlo solo. **El argumento no depende de qué proveedores sean.**
 2. **La capa de acción.** Alertas → mecánico con ETA, eco-feedback al conductor, ventana óptima de carga: interfaces por rol que ninguno de los dos ofrece.
 3. **Foco local.** Un equipo en La Serena iterando con la flota de La Serena.
 
@@ -65,9 +65,9 @@ Auth real por roles, mapa real (el GPS de Tracktec se pinta con MapLibre/OSM, gr
 
 ```
 LA MICRO (42× Foton U9)                LA BAHÍA (El Sauce — Eserco; obra Enel)
-  │ CAN + GPS (hardware Tracktec)        │ OCPP 1.6
+  │ CAN + GPS (equipo a bordo)           │ OCPP 1.6
   ▼                                      ▼
-TRACKTEC Suite                         CMS DEL TERMINAL (¿Dhemax?)
+TELEMETRÍA A BORDO (¿Tracktec?)        CMS DEL TERMINAL (¿Dhemax?)
 SOC, SoH BMS, km, eventos de           sesiones: kWh, curva de potencia,
 conducción, códigos de falla           SOC inicio/fin, horarios
   │ web services / exports               │ API / exports (por confirmar)
@@ -146,13 +146,13 @@ El SoH del BMS no se lee, se **estima**:
 ## 5. Plan por fases
 
 ### Fase 0 — El informe que abre puertas (2–4 semanas, sin integración)
-Con el visto bueno de Alejandro: **exports históricos** de Tracktec (SOC/SoH/km/eventos por bus) y Dhemax (sesiones de carga) para 5–10 micros. Hay ~20 meses de operación acumulada. Se construye: importador CSV (primer adaptador) + esquema canónico + estimador SoH v1 + **informe "Primera curva real de degradación de la flota E-01/E-02 y costo de degradación por sesión de carga"**. Ese papel convierte "un par de pruebas" en piloto formal. Cero riesgo y cero costo para Eserco; el informe queda para ellos.
+Con el visto bueno de Alejandro: **exports históricos** del sistema de telemetría (SOC/SoH/km/eventos por bus) y del sistema de gestión de carga (sesiones) — sean Tracktec/Dhemax u otros; las preguntas 3 y 6 lo confirman — para 5–10 micros. Hay ~20 meses de operación acumulada. Se construye: importador CSV (primer adaptador) + esquema canónico + estimador SoH v1 + **informe "Primera curva real de degradación de la flota E-01/E-02 y costo de degradación por sesión de carga"**. Ese papel convierte "un par de pruebas" en piloto formal. Cero riesgo y cero costo para Eserco; el informe queda para ellos.
 
 ### Fase 1 — Piloto vivo (1–2 meses después)
-Credenciales read-only (web services Tracktec + API/export del CMS del terminal, sea Dhemax u otro), polling con Vercel Cron, app en modo `live` con las 42 unidades, alertas reales, mapa real, pantalla nueva de **Cargas**, auth por roles para el jefe de flota y la A.T.
+Credenciales read-only (API/web services del sistema de telemetría + API/export del CMS del terminal, sean cuales sean), polling con Vercel Cron, app en modo `live` con las 42 unidades, alertas reales, mapa real, pantalla nueva de **Cargas**, auth por roles para el jefe de flota y la A.T.
 
 ### Fase 2 — Profundidad (según resultados)
-Eco-feedback al conductor en cabina (los eventos ya vienen de Tracktec), módulo taller en uso real (órdenes de trabajo = data propia), modelo v2 con más historia, y recién ahí evaluar el T-Box Foton vía Andes Motor.
+Eco-feedback al conductor en cabina (los eventos de conducción ya los captura la telemetría), módulo taller en uso real (órdenes de trabajo = data propia), modelo v2 con más historia, y recién ahí evaluar el T-Box Foton vía Andes Motor.
 
 ---
 
@@ -164,10 +164,10 @@ Eco-feedback al conductor en cabina (los eventos ya vienen de Tracktec), módulo
 1. ¿Quién es la contraparte dueña de los datos: Eserco, Liserco, o pasan por la DTPR/MTT? ¿Qué rol juega la Asistencia Técnica en ese acceso? ¿Necesitamos NDA o convenio (p. ej. vía INACAP)?
 2. ¿Cuántas micros y cuánta historia podríamos usar para la prueba? ¿Desde noviembre 2024?
 
-**Tracktec (el lado del vehículo):**
-3. ¿Qué módulos de la Suite contrató Eserco y qué variables entregan por bus: SOC, SoH, tensiones máx/mín de celda, temperaturas, códigos de falla, eventos de conducción (aceleración/frenado)? ¿Cada cuántos segundos?
-4. ¿Tienen habilitados los web services de la Suite o solo dashboard/exports? ¿Quién administra las credenciales?
-5. ¿La flota participa del estudio de degradación Tracktec–DICTUC? ¿Les han entregado resultados?
+**Telemetría del vehículo (¿Tracktec u otra? — el encargado no lo aseguró):**
+3. ¿Qué sistema de telemetría/gestión de flota usan los buses hoy? ¿Es Tracktec (que el encargado nombró como quien mide SOH en el mercado), el AVL exigido por el contrato, la plataforma del fabricante, u otro? ¿Qué variables entrega por bus: SOC, SoH, tensiones máx/mín de celda, temperaturas, códigos de falla, eventos de conducción (aceleración/frenado)? ¿Cada cuántos segundos?
+4. ¿Ese sistema tiene web services/API de solo lectura habilitados o solo dashboard/exports? ¿Quién administra las credenciales?
+5. Si es Tracktec: ¿la flota participa del estudio de degradación Tracktec–DICTUC? ¿Les han entregado resultados?
 
 **La carga en El Sauce (el lado del enchufe):**
 6. ¿Quién gestiona hoy la carga del terminal y con qué plataforma: ¿Dhemax/Copec (como menciona el encargado), Enel X (que construyó la infraestructura eléctrica), o software del fabricante de los cargadores? ¿Qué entrega por sesión: kWh, curva de potencia, SOC inicial/final, duración, horario? ¿Se registra también la **temperatura del pack** al conectar (o esa solo la ve Tracktec)? ¿Por API o reporte?

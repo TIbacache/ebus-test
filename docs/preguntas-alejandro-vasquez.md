@@ -13,11 +13,11 @@
 1. ¿Quién es la contraparte dueña de los datos (Eserco, Liserco, DTPR/MTT)? ¿Necesitamos firmar un NDA o convenio? (Podemos canalizarlo vía INACAP si eso facilita las cosas.)
 2. ¿Con cuántas máquinas y cuánta historia podríamos partir? ¿Hay registros guardados desde el inicio de la operación (noviembre 2024)?
 
-## Sobre la telemetría del vehículo (Tracktec)
+## Sobre la telemetría del vehículo
 
-3. ¿Qué variables entrega la plataforma por bus (SOC, SOH, tensiones máx/mín de celda, temperaturas, códigos de falla, eventos de conducción) y con qué frecuencia se registran?
+3. ¿Qué sistema de telemetría o gestión de flota usan los buses hoy (¿Tracktec u otro?) y qué variables entrega por bus (SOC, SOH, tensiones máx/mín de celda, temperaturas, códigos de falla, eventos de conducción)? ¿Con qué frecuencia se registran?
 4. ¿Se puede exportar el histórico (CSV/Excel) o acceder por API/web services de solo lectura? ¿Quién administra esas credenciales?
-5. ¿La flota participa del estudio de degradación de baterías de Tracktec con la Universidad Católica (DICTUC)? ¿Les han compartido resultados?
+5. Si usan Tracktec: ¿la flota participa del estudio de degradación de baterías que Tracktec desarrolla con la Universidad Católica (DICTUC)? ¿Les han compartido resultados?
 
 ## Sobre la carga (electroterminal El Sauce)
 
