@@ -6,6 +6,7 @@
 import {
   Activity,
   BarChart3,
+  BatteryCharging,
   BellRing,
   Bug,
   Bus,
@@ -47,14 +48,14 @@ export interface MenuSection {
 export const menuSections: MenuSection[] = [
   { id: "error", title: "Reportar un Error", desc: "Cuéntanos qué falló", icon: Bug },
   { id: "sugerencia", title: "Enviar Sugerencias", desc: "Ideas para mejorar", icon: Lightbulb },
-  { id: "guia", title: "Guía Rápida de Navegación", desc: "Recorre las 9 pantallas", icon: Compass },
+  { id: "guia", title: "Guía Rápida de Navegación", desc: "Recorre las 10 pantallas", icon: Compass },
   { id: "buscador", title: "Buscador Inteligente", desc: "Encuentra pantallas y acciones", icon: Search },
   { id: "faq", title: "Preguntas Frecuentes", desc: "Respuestas rápidas", icon: HelpCircle },
   { id: "contacto", title: "Número de Contacto", desc: "Habla con Soporte", icon: Phone },
   { id: "sistema", title: "Información del Sistema", desc: "Acerca de E-Bus Control", icon: Info },
 ];
 
-// ---- Guía rápida de las 9 pantallas ---------------------------------------
+// ---- Guía rápida de las 10 pantallas --------------------------------------
 
 export interface GuideStep {
   n: number;
@@ -95,34 +96,41 @@ export const guideSteps: GuideStep[] = [
   },
   {
     n: 5,
+    title: "Cargas",
+    desc: "Sesiones de carga del electroterminal: SOC, kWh, potencia, ventana óptima y estrés de carga por sesión.",
+    href: "/cargas",
+    icon: BatteryCharging,
+  },
+  {
+    n: 6,
     title: "Alertas",
     desc: "Centro de alertas activas con timeline y resueltas. MIC-104 al tope, con badge rojo pulsante.",
     href: "/alertas",
     icon: BellRing,
   },
   {
-    n: 6,
+    n: 7,
     title: "Mecánico",
     desc: "Solicitudes de asistencia entrantes. Botón ACEPTAR e inicio de cuenta regresiva de ETA (15 min).",
     href: "/mecanico",
     icon: Wrench,
   },
   {
-    n: 7,
+    n: 8,
     title: "Conductor",
     desc: "Eco-Score en cabina y consejos de conducción para extender la vida útil de la batería.",
     href: "/conductor",
     icon: Gauge,
   },
   {
-    n: 8,
+    n: 9,
     title: "Reportes",
     desc: "Degradación por unidad, eco-score por conductor y tendencia de salud general de la flota.",
     href: "/reportes",
     icon: BarChart3,
   },
   {
-    n: 9,
+    n: 10,
     title: "Configuración",
     desc: "Umbrales de alerta, gestión de usuarios, notificaciones y parámetros de carga inteligente.",
     href: "/configuracion",
@@ -190,6 +198,7 @@ export interface SearchEntry {
 const screenEntries: SearchEntry[] = [
   { label: "Resumen (Dashboard)", hint: "KPIs, mapa y alertas", icon: LayoutDashboard, href: "/dashboard", keywords: ["dashboard", "kpi", "mapa", "resumen", "inicio"] },
   { label: "Flota", hint: "Todas las micros con semáforo", icon: Bus, href: "/flota", keywords: ["unidades", "micros", "tabla", "semaforo", "bateria"] },
+  { label: "Cargas", hint: "Sesiones de carga y estrés por unidad", icon: BatteryCharging, href: "/cargas", keywords: ["carga", "sesiones", "kwh", "ventana", "estres", "el sauce", "cargador"] },
   { label: "Alertas", hint: "Centro de alertas activas", icon: BellRing, href: "/alertas", keywords: ["notificaciones", "critica", "mic-104", "timeline"] },
   { label: "Mecánico", hint: "Solicitudes de asistencia y ETA", icon: Wrench, href: "/mecanico", keywords: ["asistencia", "eta", "taller", "reparacion"] },
   { label: "Conductor", hint: "Eco-Score y tips de cabina", icon: Gauge, href: "/conductor", keywords: ["eco-score", "cabina", "conduccion", "feedback"] },

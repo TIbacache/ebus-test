@@ -1,6 +1,7 @@
 import {
   LayoutDashboard,
   Bus,
+  BatteryCharging,
   BellRing,
   Wrench,
   Gauge,
@@ -14,6 +15,7 @@ import type { NavIcon } from "@/lib/constants";
 export const navIcon: Record<NavIcon, LucideIcon> = {
   resumen: LayoutDashboard,
   flota: Bus,
+  cargas: BatteryCharging,
   alertas: BellRing,
   mecanico: Wrench,
   conductor: Gauge,

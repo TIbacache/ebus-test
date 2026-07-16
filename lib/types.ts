@@ -134,3 +134,47 @@ export interface UsuarioSistema {
   rol: string;
   estado: "Activo" | "Inactivo";
 }
+
+// ---- Cargas (hallazgo H2: la sesión de carga como entidad estrella) --------
+
+export type VentanaCarga = "optima" | "fuera";
+
+/**
+ * Sesión de carga en el electroterminal. En demo: mock narrativo; en live:
+ * normalizada desde el CMS de los cargadores (OCPP) vía adaptador
+ * (ver docs/analisis-integracion-la-serena.md §4).
+ */
+export interface SesionCarga {
+  id: string;
+  unidad: string;
+  fecha: string; // "Hoy" | "Anoche" | "Ayer" | "12 jul"
+  inicio: string; // "23:41"
+  fin: string;
+  duracionMin: number;
+  socInicial: number; // %
+  socFinal: number; // %
+  kwh: number;
+  potenciaMaxKw: number;
+  tempInicio: number; // °C del pack al conectar
+  cargador: string; // bahía, ej. "ES-04"
+  ventana: VentanaCarga;
+  /** Estrés de carga 0-100 (modelo v0): proxy del costo de degradación de la sesión. */
+  estres: number;
+}
+
+/** Resumen de carga por unidad — últimos 30 días. */
+export interface ResumenCargaUnidad {
+  unidad: string;
+  sesiones30d: number;
+  kwh30d: number;
+  pctVentanaOptima: number; // % de sesiones en ventana óptima
+  estresPromedio: number; // 0-100
+}
+
+/** KPIs de carga de la flota completa (anoche). */
+export interface ResumenCargasFlota {
+  sesionesAnoche: number;
+  kwhAnoche: number;
+  pctVentanaOptima: number;
+  estresPromedio: number;
+}

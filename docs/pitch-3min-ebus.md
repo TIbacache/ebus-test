@@ -45,7 +45,7 @@ La estructura de 4 bloques es un requisito, así que se respeta. Pero dentro de 
 
 > El objetivo: pasajeros y conductores más seguros, menos costo de mantenimiento para el operador, un servicio público más confiable, y baterías que no terminan siendo residuo antes de tiempo — ODS 3, 7 y 13.
 >
-> ¿Dónde estamos? Prototipo navegable, desplegado, 9 pantallas operativas. Los datos son simulados — y por eso el objetivo **inmediato** es uno solo: **validar el sistema con datos reales de una flota de la región**. La curva de degradación de las baterías de La Serena y Coquimbo se está escribiendo ahora; en cinco años ya no se corrige — solo se paga.
+> ¿Dónde estamos? Prototipo navegable, desplegado, 10 pantallas operativas. Los datos son simulados — y por eso el objetivo **inmediato** es uno solo: **validar el sistema con datos reales de una flota de la región**. La curva de degradación de las baterías de La Serena y Coquimbo se está escribiendo ahora; en cinco años ya no se corrige — solo se paga.
 >
 > No pedimos financiamiento. Pedimos datos reales, veinte minutos para mostrar el prototipo, o el nombre de quién debería verlo.
 >
@@ -73,7 +73,7 @@ Reparto de voces (equipo de 5):
 Contenido:
 - **Velocidad:** ~390 palabras a ritmo conversacional chileno (~140 palabras/min) = 2:50. Si el corte final pasa de 3:00, cortar primero la frase de ODS del bloque 4, nunca el gancho ni el ask.
 - **El "25%" siempre con su descargo** ("es una meta, no un resultado medido"). Sin descargo, es la primera pregunta hostil del jurado.
-- Como el jurado no verá la app, la frase del bloque 4 "prototipo navegable, desplegado, 9 pantallas operativas" es la **prueba de que esto existe** — decirla con peso, no de pasada. Si las bases lo permiten, poner la URL del prototipo como texto al final del video o en la descripción de entrega.
+- Como el jurado no verá la app, la frase del bloque 4 "prototipo navegable, desplegado, 10 pantallas operativas" es la **prueba de que esto existe** — decirla con peso, no de pasada. Si las bases lo permiten, poner la URL del prototipo como texto al final del video o en la descripción de entrega.
 - Pregunta esperable (si hay Q&A): *"¿y si el bus ya trae monitoreo del fabricante?"* → El dato existe, pero vive en silos; E-Bus Control es la capa que lo integra y lo traduce en acción. No reemplazamos el BMS: lo hacemos accionable.
 
 ## Pendiente del equipo
