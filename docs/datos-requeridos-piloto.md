@@ -9,17 +9,11 @@ Prototipo: https://ebus-test.vercel.app/cargas
 
 Calcular **cuánto se degrada cada batería por efecto de las cargas y de la operación**, y con eso **proyectar cuándo correspondería reemplazar cada pack**. Es el cálculo que hoy ningún sistema entrega: unos miden la ruta, otros el enchufe, y nadie cruza ambos.
 
-**No necesito** acceso a sus sistemas, instalar nada en los buses, ni datos personales de conductores. Solo planillas de lo que ya registran.
+**No necesito** acceso a sus sistemas, instalar nada en los buses, ni datos personales de conductores. Solo planillas de lo que ya registran, **en el formato que entreguen sus sistemas: no requiero ninguna preparación previa** — mientras más columnas e historia traiga el archivo, mejor para el análisis.
 
 **Sin costo ni compromiso:** el informe con la curva real de degradación queda para ustedes, les sirva o no mi proyecto.
 
----
-
-## Cómo exportar (importante)
-
-Si el sistema tiene botón de **exportar**, úsenlo con el rango de fechas más largo posible y **mándenme el archivo tal como sale, con todas sus columnas**. No hace falta limpiar, filtrar ni ordenar nada.
-
-Las tablas siguientes son para verificar qué está disponible — **no una lista para armar a mano**.
+El detalle siguiente es referencial: indica qué datos uso y para qué, por si ayuda a decidir de qué sistema conviene sacarlos.
 
 ---
 
@@ -44,7 +38,7 @@ Una fila por sesión de carga.
 
 | Dato | |
 |---|---|
-| **Qué bus cargó** — si el sistema registra tarjeta RFID o nº de bahía, sirve igual: adjuntar la tabla que asocia esa tarjeta/bahía con cada bus | **Imprescindible** |
+| **Qué bus cargó** — si el registro es por tarjeta RFID o nº de bahía, me sirve igual, junto con la tabla que asocie esa tarjeta o bahía con cada bus | **Imprescindible** |
 | Fecha y hora de inicio y término | **Imprescindible** |
 | Energía entregada (kWh) | **Imprescindible** |
 | SOC al inicio y al final de la carga (%) | **Imprescindible** |
