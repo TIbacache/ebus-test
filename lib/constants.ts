@@ -144,13 +144,8 @@ export const ods = [
   },
 ];
 
-export const equipo = [
-  "Rafael Orrego",
-  "Benjamín Araya",
-  "Fernando Sermeño",
-  "Tomás Ibacache",
-  "Dilan Cortés",
-];
+/** Autor del proyecto (diseño, desarrollo y análisis). */
+export const autor = "Tomás Ibacache Cortés";
 
 export const institucion = "INACAP La Serena";
 export const tagline = "El pulso de tu flota, en tiempo real";

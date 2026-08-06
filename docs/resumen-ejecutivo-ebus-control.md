@@ -57,7 +57,7 @@ Cuatro funciones, en ese orden:
 3. **Avisar a quien puede actuar.** Flujo automático: detección → Centro de Control → mecánico asignado, con ubicación exacta y ETA. Sin llamadas, sin adivinanzas.
 4. **Corregir la causa.** Eco-Score por conductor y ventana óptima de recarga: cerrar el ciclo sobre las dos variables que **de verdad** determinan la vida útil de una batería.
 
-**Hipótesis de trabajo del equipo:** intervenir sistemáticamente sobre estilo de conducción y hábitos de carga permite extender la vida útil de las baterías en torno a un **25%**. Es una meta, no un resultado medido. Validarla requiere datos reales — y ahí es donde esta conversación se pone interesante.
+**Hipótesis de trabajo:** intervenir sistemáticamente sobre estilo de conducción y hábitos de carga permite extender la vida útil de las baterías en torno a un **25%**. Es una meta, no un resultado medido. Validarla requiere datos reales — y ahí es donde esta conversación se pone interesante.
 
 ---
 
@@ -135,9 +135,9 @@ Todavía estamos a tiempo de actuar sobre ella.
 
 ---
 
-**Tomás Ibacache** — E-Bus Control · INACAP La Serena
-Equipo: Rafael Orrego · Benjamín Araya · Fernando Sermeño · Tomás Ibacache · Dilan Cortés
+**Tomás Ibacache Cortés** — E-Bus Control · INACAP La Serena
+Diseño, desarrollo y análisis del proyecto
 
-✉️ tomasibac@gmail.com · 📱 [teléfono] · 🔗 [URL del prototipo]
+✉️ tomasibac@gmail.com · 📱 [teléfono] · 🔗 https://ebus-test.vercel.app
 
 *Prototipo navegable disponible para demostración inmediata.*

@@ -16,7 +16,7 @@ import {
   Send,
   X,
 } from "lucide-react";
-import { ods, equipo, institucion } from "@/lib/constants";
+import { ods, autor, institucion } from "@/lib/constants";
 import { EcgLogo } from "@/components/ui/EcgLogo";
 import {
   contacto,
@@ -650,17 +650,12 @@ function Sistema() {
 
       <div>
         <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-text-faint">
-          Equipo
+          Desarrollado por
         </p>
         <div className="flex flex-wrap gap-1.5">
-          {equipo.map((n) => (
-            <span
-              key={n}
-              className="rounded-full border border-line bg-surface px-2.5 py-1 text-[11px] font-medium text-text-muted"
-            >
-              {n}
-            </span>
-          ))}
+          <span className="rounded-full border border-line bg-surface px-2.5 py-1 text-[11px] font-medium text-text-muted">
+            {autor}
+          </span>
         </div>
         <p className="mt-2 text-[11px] text-text-faint">{institucion}</p>
       </div>
