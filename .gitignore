@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# PDFs generados desde los .md de docs/ (se regeneran, no se versionan)
+docs/*.pdf

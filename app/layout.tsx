@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   description:
     "Sistema de Monitoreo Inteligente de Baterías para Flotas de Buses Eléctricos — INACAP La Serena. El pulso de tu flota, en tiempo real.",
   applicationName: "E-Bus Control",
-  authors: [{ name: "Equipo E-Bus Control — INACAP La Serena" }],
+  authors: [{ name: "Tomás Ibacache Cortés — INACAP La Serena" }],
 };
 
 // Colorea la barra del navegador móvil según el esquema del SO (claro por defecto).
